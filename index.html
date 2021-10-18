@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Home</title>
+		<style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+			.grid-container {
+			  display: grid;
+			  grid-gap: 50px 100px;
+			  grid-template-columns: auto auto auto;
+			  /*background-color: #2196F3;*/
+			  padding: 10px;
+			}
+
+			.grid-item {
+			  background-color: rgba(255, 255, 255, 0.8);
+			  border: 1px solid rgba(0, 0, 0, 0.8);
+			  padding: 80px;
+			  font-size: 30px;
+			  text-align: center;
+			  
+			  width: 250px;
+			  height 250px;
+
+			}	
+			.grid-item img{
+				width: 200px;
+				height:200px;
+
+
+				}
+        
+		  .center {
+			  float: center;
+      }
+		
+			header{
+				background: red;
+			}
+			header::after{
+				content: '';
+				display: table;
+				clear:both;
+			}
+			#home{
+				float: left;
+			}
+			#rest{
+				float:right;
+			}
+      .blue { 
+        background-color: blue;
+      }
+      .navbar{
+        display: flex;
+        flex-direction: row;
+		color: white;
+        background-color: #82160e;
+        list-style: none;
+      }
+      .search-bar{
+        margin-left: auto;
+        /*margin-right: auto;*/
+        align-self: center;
+      }
+	  .filter-bar{
+		align-self:center;
+		margin-right:auto;
+	  }
+      .left-nav{
+        padding: 1%;
+      }
+      .right-nav{
+        padding: 1%;
+      }
+	  
+	  body{
+		background: #4f4a4a;
+	  }
+
+	  nav li:hover{
+	  
+		background: #b8605a;
+	  
+	  }
+		</style>
+	</head>
+	<body>
+		<header>
+			<nav >
+				<ul class="navbar">
+					<li class="left-nav" >Home</li>
+					<li class="left-nav" >Help</li>
+					<li class="search-bar"><input placeholder="Search" default="Search" type="text" style="width:800px"></li>
+					<li class="filter-bar"><select>
+											<option>Filters</option>
+											<option>Books </option>
+											<option>Furniture</option>
+											<option>Lab Equipment</option>
+											<option>Misc</option>
+											</select></li>
+					<li class="right-nav">Create Auction </li>
+					<li class="right-nav">SignUp</li>
+					<li class="right-nav">Login</li>
+				</ul>
+			</nav>
+		</header>
+		<div class="webpage">
+		<div class="grid-container">
+		  <div class="grid-item"><img src="imgs/87344_XXX_v1.jpg">
+													<br>Chari
+													<br>curr Price $10.00</div>
+		  <div class="grid-item"><img src="imgs/college-textbooks-101.jpg">
+													<br>Collegtextbook
+													<br>curr Price: $3.00</div>
+		  <div class="grid-item"><img src="imgs/FutonTwin1.jpg">
+													<br>Futon
+													<br>curr Price: $80.00</div>  
+		  <div class="grid-item"><img src="imgs/IMG_2860-rotated.jpg">
+													<br>Vacuum
+													<br>curr Price: $6.00</div>  
+		  <div class="grid-item"><img src="imgs/s-l300.jpg">
+													<br>Calculus book
+													<br>curr Price: $7.00</div>  
+		  <div class="grid-item"><img src="imgs/plushy-bee-kind-shop-toy-happy-fawn-395.jpg">
+													<br>Bee plushy
+													<br>curr Price: $2.50</div>  
+		  <div class="grid-item"><img src="imgs/GUEST_f364f9b7-05de-4824-a82e-614767747122.jfif">
+													<br>Catcher in the Rye
+													<br>curr Price: $1.00</div>  
+		  <div class="grid-item"><img src="imgs/52JV37_AW01.jfif">
+													<br>test tube
+													<br>curr Price: $2.00</div>  
+		  <div class="grid-item"><img src="imgs/41P48f22tBL._SX342_.jpg">
+													<br>beaker
+													<br>curr Price: $4.00</div>  
+		</div>
+		</div>
+	</body>
+<html>
