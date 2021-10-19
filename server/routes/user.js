@@ -5,7 +5,7 @@ const router = express.Router()
 
 // CRUD
 // these routes may change, more might will most likely be added - this is just a outline
-router.get('/:id', getUser);
+router.get('/:displayName', getUser);
 router.delete('/:id', deleteUser);
 router.post('/', createUser);
 

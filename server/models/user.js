@@ -8,18 +8,29 @@ const userSchema = mongoose.Schema({
         type: String,
         lowercase: true,
         required: true,
+        default: '',
     }, // need to add some method of validation (ensure that email is an email, ensure that email is not duplicate)
     password: {
         type: String,
         required: true,
+        default: '',
     }, // see above note
-    displayName: String,
-    description: String,
+    displayName: {
+        type: String,
+        default: '',
+    },
+    description: {
+        type: String,
+        default: '',
+    },
     joinDate: {
         type: Date,
-        default: Date.now()
+        default: Date.now(),
     },
-    profilePicture: Buffer, // not sure if correct datatype
+    profilePicture: {
+        type: Buffer,
+        default: null,
+    }, // not sure if correct datatype
     currentAuctions: {
         type: Array,
         of: [mongoose.Schema.ObjectId],
