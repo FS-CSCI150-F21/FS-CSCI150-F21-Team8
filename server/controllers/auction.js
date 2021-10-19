@@ -4,6 +4,8 @@ import AuctionData from '../models/auction.js';
 export const getAuction = async (req, res) => {
     try {
         // get auction by filters (id, name, tags, etc )
+        console.log('test')
+        res.status(200).json('hello world')
     } catch (error) {
         res.status(404).json({message: error.message})     
     }
