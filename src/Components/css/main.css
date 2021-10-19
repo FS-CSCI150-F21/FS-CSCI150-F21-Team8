@@ -1,0 +1,65 @@
+.header-h1{
+    color: antiquewhite;
+    font-family: 'Roboto Condensed', sans-serif;
+    text-align: center;
+    text-transform: uppercase;
+    /* border-style: solid; */
+    margin:auto;
+    /* border-radius: 15px; */
+    
+
+}
+
+.navbar{
+    background-color: rgb(255, 246, 246);
+    border-radius: 15px;
+    border-style: hidden;
+    padding: 18px; 
+    text-align: center;
+    width: auto;
+    position: sticky;
+    top:0;
+    z-index: 1;
+}
+
+.navbar a{
+    color: rgb(27, 22, 22);
+    text-decoration: none;
+    padding: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-decoration: none;
+    color: black;
+    font-size: 17px;
+    
+  
+}
+.navbar a:hover{
+    background-color: #7c7e80;
+    border-style: hidden;
+    border-radius: 5px;
+    color: rgb(255, 254, 253);
+}
+
+.container-profile{
+    background-color: rgb(255, 255, 255);
+    border-radius: 15px;
+    border-style: hidden;
+    padding: 18px; 
+    text-align: center;
+}
+
+.container-editProfile{
+    background-color: rgb(255, 255, 255);
+    border-radius: 15px;
+    border-style: hidden;
+    padding: 18px; 
+    text-align: center;
+}
+
+.container-profileInfo{
+    background-color: rgb(255, 255, 255);
+    border-radius: 15px;
+    border-style: hidden;
+    padding: 18px; 
+    text-align: center;
+}
