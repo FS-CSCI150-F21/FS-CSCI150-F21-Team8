@@ -33,14 +33,22 @@ const auctionSchema = mongoose.Schema({
     },
     author: {
         type: mongoose.Schema.ObjectId, // not too sure on this, but want to have the author field reference to actual user in db
-        ref: 'user'
+        default: null,
+        ref: 'user',
     },
     highestBidder: {
         type: Object,
-        default: {
-            userBidding: mongoose.Schema.ObjectId, 
-            bidAmount: Number
-        }
+        of: {
+            userBidding: {
+                type: mongoose.Schema.ObjectId,
+                default: null,
+            },
+            bidAmount: {
+                type: Number,
+                default: 0,
+            }
+        },
+        default: null
     },
     rating: {
         type: Number,

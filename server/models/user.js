@@ -33,12 +33,12 @@ const userSchema = mongoose.Schema({
     }, // not sure if correct datatype
     currentAuctions: {
         type: Array,
-        of: [mongoose.Schema.ObjectId],
+        of: mongoose.Schema.ObjectId,
         default: []
     }, // not sure if correct declaration
     currentBids: {
         type: Array,
-        of: Number,
+        of: mongoose.Schema.ObjectId,
         default: []
     },
 }, { collection: 'users'})
