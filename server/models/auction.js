@@ -28,13 +28,12 @@ const auctionSchema = mongoose.Schema({
     },
     dateClose: {
         type: Date,
-        required: true,
         default: generateClose, // default is 4 weeks after post
     },
     author: {
         type: mongoose.Schema.ObjectId, // not too sure on this, but want to have the author field reference to actual user in db
         default: null,
-        ref: 'user',
+        required: true,
     },
     highestBidder: {
         type: Object,
@@ -48,11 +47,7 @@ const auctionSchema = mongoose.Schema({
                 default: 0,
             }
         },
-        default: null
-    },
-    rating: {
-        type: Number,
-        default: 0,
+        default: {}
     },
     tags: {
         type: Array,

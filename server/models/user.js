@@ -41,6 +41,10 @@ const userSchema = mongoose.Schema({
         of: mongoose.Schema.ObjectId,
         default: []
     },
+    rating: {
+        type: Number,
+        default: 5,
+    },
 }, { collection: 'users'})
 
 const UserData = mongoose.model('user', userSchema);
