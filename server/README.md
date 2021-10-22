@@ -8,5 +8,6 @@ Note that you need to install the related dependencies (node_modules is not incl
 To send requests to the server in React, you need to install axios using "npm install axios". 
 You can then use axios.get, .post., .delete (and other requests that will be added in the future). Make sure to follow the request format (look at routes). Note that routes are tentative / some may be non-functional.
 
+See the example.js file under the example folder for some additional information on axios usage.
 
 
