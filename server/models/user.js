@@ -45,6 +45,10 @@ const userSchema = mongoose.Schema({
         type: Number,
         default: 5,
     },
+    phoneNumber: {
+        type: String,
+        default: ''
+    }
 }, { collection: 'users'})
 
 const UserData = mongoose.model('user', userSchema);

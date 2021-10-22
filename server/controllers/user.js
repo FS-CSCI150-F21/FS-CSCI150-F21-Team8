@@ -2,7 +2,6 @@ import UserData from '../models/user.js';
 
 // httpstatus.com for codes
 export const getUser = async (req, res) => {
-    console.log(req.params.displayName)
     const name = req.params.displayName;
     try {
         // get user by filters (displayname, id, )
@@ -15,8 +14,6 @@ export const getUser = async (req, res) => {
 
 export const createUser = async (req, res) => {
     const user = req.body;
-    // console.log(user)
-    // const newUser = user;
     const newUser = new UserData(user);
     try {
         await newUser.save()
@@ -30,7 +27,6 @@ export const createUser = async (req, res) => {
 export const deleteUser = async (req, res) => {
     // deleting by id, will change to add more later
     const id = req.params.id;
-    console.log(id)
     try {
         await UserData.findByIdAndRemove(id).exec();
         res.status(200).json({message: 'User Deleted.'});
@@ -40,7 +36,6 @@ export const deleteUser = async (req, res) => {
 }
 
 export const updateUser = async (req, res) => {
-    console.log(req.params, req.body)
     try {
         const user = await UserData.findOne({displayName: req.params.displayName}).exec()
         if (req.body.currentAuctions){

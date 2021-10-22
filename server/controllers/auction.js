@@ -3,7 +3,6 @@ import AuctionData from '../models/auction.js';
 // httpstatus.com for codes
 export const getAuction = async (req, res) => {
     // const name = req.params.auctionName
-    console.log('a')
     try {
         // get auction by filters (id, name, tags, etc )
         const auction = await AuctionData.findOne({}).exec()
@@ -17,14 +16,11 @@ export const getAuction = async (req, res) => {
 
 export const createAuction = async (req, res) => {
     const auction = req.body;
-    console.log('a', req.body)
     const newAuction = new AuctionData(auction);
     try {
         await newAuction.save()
-        console.log('b')
         res.status(201).json(newAuction);
     } catch (error) {
-        console.log('c')
         res.status(409).json({message: error.message})     
     }
 }
@@ -37,5 +33,23 @@ export const deleteAuction = async (req, res) => {
         res.status(200).json({message: 'Auction Deleted.'});
     } catch (error) {
         res.status(500).json({message: error.message})     
+    }
+}
+
+export const updateAuction = async (req, res) => {
+    try {
+        const auction = await AuctionData.findOne({id: req.params.id}).exec()
+        if (req.body.auctionDescription){
+            auction.auctionDescription = req.body.auctionDescription
+        }
+        if (req.body.highestBidder) {
+            auction.highestBidder = highestBidder
+        }
+        if (req.body.auctioName){
+            auction.auctionName = req.body.auctionName
+        }
+        await auction.save()
+    } catch (error) {
+        res.status(404).json({message: error.message})
     }
 }
