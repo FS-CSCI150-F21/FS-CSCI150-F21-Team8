@@ -1,10 +1,15 @@
-import React from "react";
+import React, { Component } from "react";
+import { BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
 
-import Body from "./Components/Body/Body";
-import Header from "./Components/Header/Header"
+import Body from "./Components/Body";
+import Header from "./Components/Header";
 import './index.css'
 
-function App() {
+class App extends Component {
+
+
+
+  render(){
     return (
       <div className="App">
           <Header />
@@ -12,5 +17,7 @@ function App() {
       </div>
     )
   }
+    
+}
   
-  export default App;
+export default App;
