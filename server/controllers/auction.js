@@ -45,8 +45,11 @@ export const updateAuction = async (req, res) => {
         if (req.body.highestBidder) {
             auction.highestBidder = highestBidder
         }
-        if (req.body.auctioName){
+        if (req.body.auctionName){
             auction.auctionName = req.body.auctionName
+        }
+        if (req.body.author){
+            auction.author = req.body.author
         }
         await auction.save()
     } catch (error) {
