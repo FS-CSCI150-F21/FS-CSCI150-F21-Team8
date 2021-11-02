@@ -5,7 +5,7 @@ export const getAuction = async (req, res) => {
     // const name = req.params.auctionName
     try {
         // get auction by filters (id, name, tags, etc )
-        const auction = await AuctionData.findOne({}).exec()
+        const auction = await AuctionData.findOne({id: req.params.id}).exec()
         console.log(auction)
         res.status(200).json(auction);
     } catch (error) {
