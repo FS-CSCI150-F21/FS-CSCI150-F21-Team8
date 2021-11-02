@@ -58,6 +58,11 @@ const auctionSchema = mongoose.Schema({
         type: String,
         default: '',
     },
+    startingBid: {
+        type: Number,
+        default: 0,
+        required: true,
+    }
 }, { collection: 'auctions'})
 
 const AuctionData = mongoose.model('auction', auctionSchema);
