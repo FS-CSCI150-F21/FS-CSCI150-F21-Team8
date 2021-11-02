@@ -8,9 +8,10 @@ const Body = () => {
             </div>
 
 			<div className="ProductDescription">
+
 				<table>
 					<tr className="ItemName">
-						<td colSpan="2"> <input type="text"></input></td>
+						<td colSpan="2">  </td>
 					</tr>
 		
 					<tr className="ItemDescription">
@@ -22,7 +23,7 @@ const Body = () => {
 						<td> <a href=""> <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGsRk74PQxlaZfG2MV4KnQxkwc7kZmioYnQg&usqp=CAU" class="img4"></img></a></td>
 					</tr>
 					<tr className="Bidding">
-						<td> Figure out how to pull bid status from db and display here</td>
+						<td></td>
 						<td> </td>
 						<td>  
 							<input type="text"></input>
