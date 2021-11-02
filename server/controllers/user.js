@@ -37,7 +37,8 @@ export const deleteUser = async (req, res) => {
 
 export const updateUser = async (req, res) => {
     try {
-        const user = await UserData.findOne({displayName: req.params.displayName}).exec()
+        console.log(req.params.id, req.body.currentAuctions)
+        const user = await UserData.findOne({id: req.params.id}).exec()
         if (req.body.currentAuctions){
             user.currentAuctions.push(req.body.currentAuctions)
         }
