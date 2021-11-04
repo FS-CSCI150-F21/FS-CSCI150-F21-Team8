@@ -4,16 +4,35 @@ import Box from '@mui/material/Box'
 import TextField  from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import { MenuItem, FormControl, Checkbox, FormControlLabel, Select, InputLabel } from '@mui/material'
+import '../App.css';
+const validateInputs = (auction) => {
+    console.log(auction)
+    if (auction.auctionName === '' 
+    || auction.auctionDescription === ''
+    || auction.auctionImages === ''
+    || auction.tags[0] === '' || auction.tags[1] === ''
+    || auction.condition === ''
+    ) {
+        return true
+    } else {
+        return false
+    }
+}
+
 export default function Create() {
+
+
     const [auction, setAuction] = useState({
         auctionName: '',
         auctionDescription: '',
-        auctionImages: [],
+        auctionImages: null,
         author: '',
         tags: ['',''],
         condition: '',
         startingBid: 0,
     })
+
+    
 
     const createAuction = () => {
         // setAuction({...auction, tags: [subject, type]})
@@ -21,20 +40,45 @@ export default function Create() {
         let put_params = {
             currentAuctions: '',
         };
-        axios.post('http://localhost:5000/auction/', auction).then((res)=>{
+        if (validateInputs(auction)){
+            console.log('something is blank')
+        } else {
+            console.log('post')
+            axios.post('http://localhost:5000/auction/', auction).then((res)=>{
             console.log(res)
             put_params.currentAuctions = res.data._id
             console.log(put_params)
-        }).then(()=>{
-            axios.put(`http://localhost:5000/user/${auction.author}`, put_params).then(()=>{
-                console.log('putted')
+            }).then(()=>{
+                axios.put(`http://localhost:5000/user/${auction.author}`, put_params).then(()=>{
+                    console.log('putted')
+                })
+            }).catch(()=>{
+                console.log('caught')
             })
-        }).catch(()=>{
-            console.log('caught')
-        })
+        }
+        
         // console.log(auction)
     }
     return (
+        <div>
+        <span className="image-box">
+            <div>
+                <img src = {auction.auctionImages} alt = {""}></img>
+            </div>
+                <input  
+                    className="image-box"
+                    type ="file"
+                    accept = ".png, .jpg, .jpeg"
+                    name = "photo"
+                    onChange={(event)=>{
+                        console.log(event.target.value)
+                        console.log(event.target.name)
+                        setAuction({...auction, auctionImages: event.target.files[0]})
+                    }}
+                />
+            </span>
+        <span>
+        
         <Box
           component="form"
           sx={{
@@ -43,11 +87,8 @@ export default function Create() {
           noValidate
           autoComplete="off"
         >
-            <span>
-            <Button 
-            sx = {{m: 2}}
-            variant="outlined">Upload Image</Button>
-            </span>
+            
+            
             <span>
                 <TextField
                     required
@@ -147,6 +188,32 @@ export default function Create() {
                 <Button variant="contained" onClick={createAuction}>Create Auction</Button>
             </div>
         </Box>
+        </span>
+        </div>
       );
 
 }
+
+
+// import React, { useState } from "react";
+
+// const AddNew = () => {
+//   const [file, setFile] = useState(null);
+//   const fileHandler = event => {
+//     console.log(event.target.files[0]);
+//     let reader = new FileReader();
+//     reader.onload = function(e) {
+//       setFile(e.target.result);
+//     };
+//     reader.readAsDataURL(event.target.files[0]);
+//   };
+
+//   return (
+//     <div className="addNew">
+//       <img src={file} alt={""} />
+//       <input accept = ".png, .jpg, .jpeg" type="file" onChange={fileHandler} />
+//     </div>
+//   );
+// };
+
+// export default AddNew;
