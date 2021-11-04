@@ -5,8 +5,15 @@ export const getAuction = async (req, res) => {
     // const name = req.params.auctionName
     try {
         // get auction by filters (id, name, tags, etc )
-        const auction = await AuctionData.findOne({id: req.params.id}).exec()
-        console.log(auction)
+        let query = AuctionData.find()
+        if (req.query.id) {
+            query.where("_id", `${req.query.id}`)
+        }
+        if (req.query.auctionName) {
+            query.where('auctionName', `${req.query.auctionName}`).regex(`(?i)${req.query.auctionName}`)
+        }
+        
+        const auction = await query.exec()
         res.status(200).json(auction);
     } catch (error) {
         console.log(error.message)
