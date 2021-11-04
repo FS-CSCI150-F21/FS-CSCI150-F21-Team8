@@ -2,13 +2,19 @@ import UserData from '../models/user.js';
 
 // httpstatus.com for codes
 export const getUser = async (req, res) => {
-    // const name = req.params.displayName;
-    // let displayName = req.query.displayName
-    // let id = req.query.id
     try {
         // get user by filters (displayname, id, )
         console.log(req.query)
+        let num = 1
+        let sort = 1;
         let query = UserData.find()
+        if (req.query.num) {
+            if (req.query.num > 10) {
+                num = 10
+            } else {
+                num = parseInt(req.query.num)
+            }
+        }
         if (req.query.displayName) {
             query.where("displayName", `${req.query.displayName}`).regex(`(?i)${req.query.displayName}`)
         }
@@ -18,13 +24,12 @@ export const getUser = async (req, res) => {
         if (req.query.email) {
             query.where('email', `${req.query.email}`)
         }
-        // console.log(query)
-        const user = await UserData.find(query).exec()
-        // } else {
-        //     user = await UserData.find({$or: [{_id: id}, {displayName: {$regex: `${displayName}`}}]}).exec()
-        // }
-        
-        
+        if (req.query.ratingSort) {
+            if (req.query.ratingSort = -1) {
+                sort = -1
+            }
+        }
+        const user = await UserData.find(query).sort({'joinDate': 1, 'rating': sort}).limit(num).exec()
         res.status(200).json(user);
     } catch (error) {
         res.status(404).json({message: error.message})     

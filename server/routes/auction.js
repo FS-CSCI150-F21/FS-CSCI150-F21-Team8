@@ -5,8 +5,7 @@ const router = express.Router()
 
 // CRUD
 // these routes may change, more might will most likely be added - this is just a outline
-router.get('/one', getAuction);
-// router.get('/recent', getAuctionRecent);
+router.get('/get', getAuction);
 router.delete('/:id', deleteAuction);
 router.post('/', createAuction);
 router.put('/:id', updateAuction)
