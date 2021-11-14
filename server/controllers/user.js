@@ -1,4 +1,5 @@
 import UserData from '../models/user.js';
+import bcrypt from 'bcrypt';
 
 const handleErrors = (error) => {
     let error_message = {}
@@ -23,11 +24,14 @@ const handleErrors = (error) => {
 
 // httpstatus.com for HTTP status codes
 export const getUser = async (req, res) => {
+    // example: get 3 users with name that contains example sort by newest accounts first
+    // http://localhost:5000/user/get?displayName=example&num=3&joinDate=-1
+    // example: get a user by email
+    // http://localhost:5000/user/get?email=test7@gmail.com
     try {
-        // get user by filters (displayname, id, )
-        console.log(req.query)
         let num = 1
-        let sort = 1;
+        let sortR = 1;
+        let sortD = 1;
         let query = UserData.find()
         if (req.query.num) {
             if (req.query.num > 10) {
@@ -46,14 +50,50 @@ export const getUser = async (req, res) => {
             query.where('email', `${req.query.email}`)
         }
         if (req.query.ratingSort) {
-            if (req.query.ratingSort = -1) {
-                sort = -1
+            if (req.query.ratingSort == -1) {
+                sortR = -1
             }
         }
-        const user = await UserData.find(query).sort({'joinDate': 1, 'rating': sort}).limit(num).exec()
+        if (req.query.joinDate) {
+            if (req.query.joinDate == -1) {
+                sortD = -1
+            }
+        }
+        const user = await UserData.find(query).sort({'joinDate': sortD, 'rating': sortR}).limit(num).exec()
         res.status(200).json(user);
     } catch (error) {
         res.status(404).json({message: error.message})     
+    }
+}
+
+export const loginUser = async (req, res) => {
+    // example: http://localhost:5000/user/login?email=test7@gmail.com&password=Example1234!
+    try {
+        let query = UserData.find()
+        if (!(req.query.id) && !(req.query.email)) {
+            throw new Error("Must provide email or user id")
+        }
+        if (!(req.query.password)) {
+            throw new Error("Must provide password")
+        }
+        if (req.query.id) {
+            query.where("_id", `${req.query.id}`)
+        }
+        if (req.query.email) {
+            query.where('email', `${req.query.email}`)
+        }
+        const user = await UserData.findOne(query).sort({'joinDate': 1}).limit(1).exec()
+        if (user === null) {
+            throw new Error("No account exists with the given id or email")
+        }
+        const pass_check = bcrypt.compareSync(req.query.password, user.password)
+        if (pass_check) {
+            res.status(200).json({message: "Passwords match"})
+        } else {
+            throw new Error("Passwords do not match")
+        }
+    } catch (error) {
+        res.status(400).json({message: error.message})
     }
 }
 

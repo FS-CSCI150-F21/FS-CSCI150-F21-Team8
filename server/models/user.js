@@ -61,7 +61,8 @@ userSchema.pre('save', async function(next) {
         error.code = 'PASSWORD_ERROR'
         throw error
     } else {
-        this._doc.password = await bcrypt.hash(this.password, 8)
+        const salt = bcrypt.genSaltSync(10);
+        this._doc.password = await bcrypt.hash(this.password, salt)
     }
     next();
 })
