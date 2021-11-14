@@ -1,6 +1,27 @@
 import UserData from '../models/user.js';
 
-// httpstatus.com for codes
+const handleErrors = (error) => {
+    let error_message = {}
+    if (error.code === 11000) {
+        error_message['email'] = 'Email already in use'
+    }    
+    if (error.code === 'PASSWORD_ERROR') {
+        error_message['password'] = 'Password must not include the display name'
+    }
+    if (error.message.includes("user validation failed")){
+        Object.values(error.errors).forEach(({properties}) => {
+            error_message[properties.path] = properties.message
+        })
+    }
+
+    console.log(error_message)
+    if (Object.keys(error_message).length === 0) {
+        error_message = error;
+    }
+    return error_message
+}
+
+// httpstatus.com for HTTP status codes
 export const getUser = async (req, res) => {
     try {
         // get user by filters (displayname, id, )
@@ -38,18 +59,16 @@ export const getUser = async (req, res) => {
 
 export const createUser = async (req, res) => {
     const user = req.body;
-    const newUser = new UserData(user);
     try {
+        const newUser = new UserData(user);
         await newUser.save()
         res.status(201).json(newUser);
     } catch (error) {
-        console.log(error)
-        res.status(409).json({message: error.message})     
+        res.status(400).json(handleErrors(error))  
     }
 }
 
 export const deleteUser = async (req, res) => {
-    // deleting by id, will change to add more later
     const id = req.params.id;
     try {
         await UserData.findByIdAndRemove(id).exec();
