@@ -1,26 +1,17 @@
-import React from 'react';
-import './App.css';
-import header from './Components/header'
-import Navbar from './Components/navbar'
-import Profile from './Components/profile'
-import PrileInfo from './Components/profileInfo'
-import EditProfile from './Components/editProfile'
+import React from "react";
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import Body from "./Components/Body";
+import Header from "./Components/header"
+import './index.css'
 
 function App() {
-  return (
-    <div className="App">
-      <Header />
-      <hr />
-      <Navbar />
-      <br />
-      <Profile />
-      <hr />
-      <ProfileInfo />
-      <hr />
-      <EditProfile />
+    return (
+      <div className="App">
+          <Header />
+          <Body />
+      </div>
+    )
+  }
 
-    </div>
-  );
-}
-
-export default App;
+  
+  export default App;
