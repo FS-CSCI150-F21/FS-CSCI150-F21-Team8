@@ -47,9 +47,10 @@ const auctionSchema = mongoose.Schema({
                 type: Number,
                 default: 0,
                 required: true,
-            }
+            },
+            default: {}
         },
-        default: {}
+        
     },
     biddingHistory: {
         type: Array,

@@ -6,8 +6,11 @@ const handleErrors = (error) => {
     if (error.code === 11000) {
         error_message['email'] = 'Email already in use'
     }    
-    if (error.code === 'PASSWORD_ERROR') {
+    if (error.code === 'PASSWORD_ERROR_DISP') {
         error_message['password'] = 'Password must not include the display name'
+    }
+    if (error.code === 'PASSWORD_ERROR_STR') {
+        error_message['password'] = 'Password must contain at least 1 special character, 1 lowercase letter, 1 uppercase letter, and 1 number'
     }
     if (error.message.includes("user validation failed")){
         Object.values(error.errors).forEach(({properties}) => {
@@ -104,6 +107,7 @@ export const createUser = async (req, res) => {
         await newUser.save()
         res.status(201).json(newUser);
     } catch (error) {
+        console.log(error)
         res.status(400).json(handleErrors(error))  
     }
 }
@@ -120,8 +124,10 @@ export const deleteUser = async (req, res) => {
 
 export const updateUser = async (req, res) => {
     try {
+        let v = true;
         console.log(req.params.id, req.body.currentAuctions)
-        const user = await UserData.findOne({id: req.params.id}).exec()
+        const user = await UserData.findOne({_id: req.params.id}).exec()
+        console.log(user)
         if (req.body.currentAuctions){
             user.currentAuctions.push(req.body.currentAuctions)
         }
@@ -131,7 +137,19 @@ export const updateUser = async (req, res) => {
         if (req.body.displayName){
             user.displayName = req.body.displayName
         }
-        await user.save()
+        if (req.body.email) {
+            user.email = req.body.email
+        }
+        if (req.body.password) {
+            user.password = req.body.password
+        }
+        if (req.body.rating) {
+            user.rating = req.body.rating
+        }
+        if (req.body.profilePicture) {
+            user.profilePicture = req.body.profilePicture
+        }
+        await user.save({validateBeforeSave: v})
     } catch (error) {
         res.status(404).json({message: error.message})
     }

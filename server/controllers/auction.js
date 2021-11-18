@@ -42,12 +42,16 @@ export const getAuction = async (req, res) => {
 }
 
 export const createAuction = async (req, res) => {
+
     const auction = req.body;
-    const newAuction = new AuctionData(auction);
+    console.log('body',req.body)
+    console.log('params', req.params)
     try {
+        const newAuction = new AuctionData(auction);
         await newAuction.save()
         res.status(201).json(newAuction);
     } catch (error) {
+        console.log(error)
         res.status(409).json({message: error.message})     
     }
 }
@@ -65,6 +69,7 @@ export const deleteAuction = async (req, res) => {
 
 export const updateAuction = async (req, res) => {
     try {
+        console.log(req.body)
         const auction = await AuctionData.findOne({id: req.params.id}).exec()
         if (req.body.auctionDescription){
             auction.auctionDescription = req.body.auctionDescription
