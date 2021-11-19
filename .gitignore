@@ -1,3 +1,4 @@
-.png
-.txt
-.ico
+*.png
+*.txt
+*.ico
+*.vscode

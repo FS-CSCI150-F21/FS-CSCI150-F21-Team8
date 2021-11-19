@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
 import axios from "axios";
 
-//import Body from "./Components/Body";
-import Header from "./Components/Header";
+import Body from "./Components/Body/body";
+import navbar from "./Components/Navbar/navbar";
 import './index.css'
 
 
@@ -14,27 +14,33 @@ class App extends Component {
     this.state = {
       name: null,
       description: null,
-      author: null
+      author: null,
+      authorName: null
     };
   }
   
   componentDidMount(){
-    axios.get(`http://localhost:5000/auction/asdf`)
+    axios.get(`http://localhost:5000/auction/${"6180adb25dbbb54dcbc4bbb0"}`)
       .then(response => this.setState({
         name: response.data.auctionName,
         description: response.data.auctionDescription,
         author: response.data.author
+      }),
+      axios.get(`http://localhost:5000/user/${"6170f830743ed8a8f4de9db9"}`)
+      .then(response => this.setState({
+        authorName: response.data.displayName
       })
+    )
     )
   }
   
   render(){
     const {name} = this.state;
     const {description} = this.state;
-    const {author} = this.state;
+    const {authorName} = this.state;
     return (
       <div className="App">
-          <Header />
+          < navbar/>
         
           <div className="Body">
             <div className="itempicture">
@@ -53,7 +59,7 @@ class App extends Component {
 
 					      <tr className="SellerProfile">
 						      <td> <a href=""> <img src="https://discountdoorhardware.ca/wp-content/uploads/2018/06/profile-placeholder-3.jpg" class="img3"></img></a></td>
-						      <td> {author}</td>
+						      <td> {authorName}</td>
 						      <td> <a href=""> <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGsRk74PQxlaZfG2MV4KnQxkwc7kZmioYnQg&usqp=CAU" class="img4"></img></a></td>
 					      </tr>
 
