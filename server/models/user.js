@@ -36,8 +36,8 @@ const userSchema = mongoose.Schema({
         default: Date.now(),
     },
     profilePicture: {
-        type: Buffer,
-        default: null,
+        type: String,
+        default: '',
     }, // not sure if correct datatype
     currentAuctions: {
         type: Array,

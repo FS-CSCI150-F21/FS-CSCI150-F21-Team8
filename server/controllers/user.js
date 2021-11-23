@@ -62,8 +62,13 @@ export const getUser = async (req, res) => {
                 sortD = -1
             }
         }
+        
         const user = await UserData.find(query).sort({'joinDate': sortD, 'rating': sortR}).limit(num).exec()
-        res.status(200).json(user);
+        if (req.query.image) {
+            res.sendFile("user-images/" + user[0].profilePicture, {root: process.cwd()})
+        } else {
+            res.status(200).json(user);
+        }
     } catch (error) {
         res.status(404).json({message: error.message})     
     }
@@ -101,8 +106,10 @@ export const loginUser = async (req, res) => {
 }
 
 export const createUser = async (req, res) => {
-    const user = req.body;
+    
     try {
+        const user = req.body;
+        user.profilePicture = req.file.filename;
         const newUser = new UserData(user);
         await newUser.save()
         res.status(201).json(newUser);

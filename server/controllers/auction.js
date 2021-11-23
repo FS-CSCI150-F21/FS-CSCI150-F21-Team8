@@ -1,5 +1,5 @@
 import AuctionData from '../models/auction.js';
-
+import path from 'path'
 // httpstatus.com for codes
 export const getAuction = async (req, res) => {
 
@@ -33,8 +33,15 @@ export const getAuction = async (req, res) => {
         if (req.query.tags) {
             query.where('tags', req.query.tags)
         }
+        
         const auction = await query.sort(sort).limit(num).exec()
-        res.status(200).json(auction);
+        // console.log(auction.auctionImages)
+        if (req.query.image) {
+            res.sendFile("auction-images/" + auction[0].auctionImages, {root: process.cwd()})
+        } else {
+            res.status(200).json(auction);
+        }
+        
     } catch (error) {
         console.log(error.message)
         res.status(404).json({message: error.message})     
@@ -43,15 +50,17 @@ export const getAuction = async (req, res) => {
 
 export const createAuction = async (req, res) => {
 
-    const auction = req.body;
-    console.log('body',req.body)
-    console.log('params', req.params)
+    
+    // console.log(req)
+    // console.log('images: ',req.body.auctionImages)
     try {
+        const auction = req.body;
+        auction.auctionImages = req.file.filename;
         const newAuction = new AuctionData(auction);
         await newAuction.save()
         res.status(201).json(newAuction);
     } catch (error) {
-        console.log(error)
+        // console.log(error)
         res.status(409).json({message: error.message})     
     }
 }
