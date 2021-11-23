@@ -41,14 +41,36 @@ const auctionSchema = mongoose.Schema({
             userBidding: {
                 type: mongoose.Schema.ObjectId,
                 default: null,
+                required: true,
             },
             bidAmount: {
                 type: Number,
                 default: 0,
-            }
+                required: true,
+            },
+            default: {}
         },
-        default: {}
+        
     },
+    biddingHistory: {
+        type: Array,
+        of: {
+            type: Object,
+            of: {
+                userBidding: {
+                    type: mongoose.Schema.ObjectId,
+                    default: null,
+                    required: true, 
+                },
+                bidAmount: {
+                    type: Number,
+                    default: 0,
+                    required: true,
+                }
+            },
+            default: {}
+        }
+    },        
     tags: {
         type: Array,
         of: String,
