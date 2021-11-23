@@ -18,9 +18,9 @@ const auctionSchema = mongoose.Schema({
         required: true,
     },
     auctionImages: {
-        type: Array,
-        of: Buffer,
-        default: [],
+        type: String,
+        default: '',
+        required: true,
     }, // not sure if correct (need data type for array of images)
     datePosted: {
         type: Date,
