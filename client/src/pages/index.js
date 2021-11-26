@@ -1,11 +1,10 @@
 import React from 'react';
 import axios from 'axios';
-import Button from 'react-bootstrap/Button'
-import Card from 'react-bootstrap/Card'
-import './cards.css'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Card from 'react-bootstrap/Card';
+
 
 class App extends React.Component {
 

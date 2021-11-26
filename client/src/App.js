@@ -7,6 +7,7 @@ import About from './pages/about';
 import Signup from './pages/signup';
 import Signin from './pages/login';
 import Create from './pages/createAuction'
+import AuctionPageBuyer from './pages/auctionpagebuyer';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
               <Route path="/signup" component={Signup} />
               <Route path="/login" component={Signin} />
               <Route path="/createAuction" component={Create} />
+              <Route path="/auctionpagebuyer" component={AuctionPageBuyer} />
            </Switch>
     </Router>
   );
