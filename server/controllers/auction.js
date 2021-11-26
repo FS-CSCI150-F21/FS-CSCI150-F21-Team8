@@ -1,5 +1,6 @@
 import AuctionData from '../models/auction.js';
 import path from 'path'
+import cloudinary from '../cloudinary-cfg/cloudinary.js'
 // httpstatus.com for codes
 export const getAuction = async (req, res) => {
 
@@ -36,11 +37,13 @@ export const getAuction = async (req, res) => {
         
         const auction = await query.sort(sort).limit(num).exec()
         // console.log(auction.auctionImages)
-        if (req.query.image) {
-            res.sendFile("auction-images/" + auction[0].auctionImages, {root: process.cwd()})
-        } else {
+        // if (req.query.image) {
+            // res.sendFile("auction-images/" + auction[0].auctionImages, {root: process.cwd()})
+            // console.log(auction)
+            // res.status(200).json(auction.auctionImages)
+        // } else {
             res.status(200).json(auction);
-        }
+        // }
         
     } catch (error) {
         console.log(error.message)
@@ -51,11 +54,10 @@ export const getAuction = async (req, res) => {
 export const createAuction = async (req, res) => {
 
     
-    // console.log(req)
+    // console.log(req.body)
     // console.log('images: ',req.body.auctionImages)
     try {
         const auction = req.body;
-        auction.auctionImages = req.file.filename;
         const newAuction = new AuctionData(auction);
         await newAuction.save()
         res.status(201).json(newAuction);
@@ -78,7 +80,7 @@ export const deleteAuction = async (req, res) => {
 
 export const updateAuction = async (req, res) => {
     try {
-        console.log(req.body)
+        // console.log(req.body)
         const auction = await AuctionData.findOne({id: req.params.id}).exec()
         if (req.body.auctionDescription){
             auction.auctionDescription = req.body.auctionDescription

@@ -64,11 +64,11 @@ export const getUser = async (req, res) => {
         }
         
         const user = await UserData.find(query).sort({'joinDate': sortD, 'rating': sortR}).limit(num).exec()
-        if (req.query.image) {
-            res.sendFile("user-images/" + user[0].profilePicture, {root: process.cwd()})
-        } else {
+        // if (req.query.image) {
+            // res.sendFile("user-images/" + user[0].profilePicture, {root: process.cwd()})
+        // } else {
             res.status(200).json(user);
-        }
+        // }
     } catch (error) {
         res.status(404).json({message: error.message})     
     }
@@ -95,8 +95,9 @@ export const loginUser = async (req, res) => {
             throw new Error("No account exists with the given id or email")
         }
         const pass_check = bcrypt.compareSync(req.query.password, user.password)
+
         if (pass_check) {
-            res.status(200).json({message: "Passwords match"})
+            res.status(200).json({...user, message: "Passwords match"})
         } else {
             throw new Error("Passwords do not match")
         }
@@ -132,9 +133,9 @@ export const deleteUser = async (req, res) => {
 export const updateUser = async (req, res) => {
     try {
         let v = true;
-        console.log(req.params.id, req.body.currentAuctions)
+        console.log(req.params.id, req.body)
         const user = await UserData.findOne({_id: req.params.id}).exec()
-        console.log(user)
+        // console.log(user)
         if (req.body.currentAuctions){
             user.currentAuctions.push(req.body.currentAuctions)
         }
@@ -156,7 +157,7 @@ export const updateUser = async (req, res) => {
         if (req.body.profilePicture) {
             user.profilePicture = req.body.profilePicture
         }
-        await user.save({validateBeforeSave: v})
+        await user.save()
     } catch (error) {
         res.status(404).json({message: error.message})
     }
