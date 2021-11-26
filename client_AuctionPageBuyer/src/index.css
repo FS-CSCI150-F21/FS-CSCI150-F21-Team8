@@ -6,12 +6,6 @@ body{
 	height: 100%;
 	width: 100%
 }
-header {
-	background-color: #b1102b;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
 
 img
 {
@@ -50,7 +44,6 @@ img
 	border-radius: 0%;
 }
 .imgnb {
-
     width:100px;
     height:50px;
 }
@@ -60,11 +53,9 @@ img
 	flex-direction: row;
 	justify-content: space-around;
     background-color: #babec2;
-	
-	
 }
 .ProductDescription {
-	width: 700px;
+	width: 600px;
 	height: 600px;
 	border: 5px solid #13284C;
 	background-color: #FFFFFF;
@@ -72,6 +63,7 @@ img
 	margin-bottom: 20px;
 	border-radius: 25px;
 }
+
 table {
 	width: 300px;
 	margin-top: 20px;
