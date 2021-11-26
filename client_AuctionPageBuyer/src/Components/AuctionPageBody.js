@@ -1,5 +1,10 @@
 import React from 'react';
 import axios from 'axios';
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 export default class AuctionPageBody extends React.Component {
 	constructor(props){
@@ -7,11 +12,10 @@ export default class AuctionPageBody extends React.Component {
 		this.state = {
 		  	name: null,
 		  	description: null,
-		  	author: null,
 		  	authorName: null
 		};
 	  }
-
+//https://bdh-server.herokuapp.com/auction/get?num=10
 	  componentDidMount(){
 		axios.get(`http://localhost:5000/auction/${"6180adb25dbbb54dcbc4bbb0"}`)
 		  .then((response) => {
@@ -31,6 +35,45 @@ export default class AuctionPageBody extends React.Component {
 	
 	render () {
 		return (
+			<div className="Body">
+        	    <div className="itempicture">
+            		<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5GueTtKoNOiHAe0ExNxfXHiFJF6o4gc2Hng&usqp=CAU" class="img2"></img> 
+            	</div>
+
+				<div className="ProductDescription">
+					<Container>
+						<Form>
+							<Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
+								<Form.Label column sm="2"> Item Name </Form.Label>
+								<Col sm="10">
+									<Form.Control plaintext readOnly defaultValue={this.state.name} />
+								</Col>
+							</Form.Group>
+
+							<Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
+								<Form.Label column sm="2"> Item Description </Form.Label>
+								<Col sm="10">
+									<Form.Control plaintext readOnly defaultValue={this.state.description} />
+								</Col>
+							</Form.Group>
+
+							<Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
+								<Form.Label column sm="2"> Item Name </Form.Label>
+								<Col sm="10">
+									<Form.Control plaintext readOnly defaultValue={this.state.name} />
+								</Col>
+							</Form.Group>
+							
+						</Form>
+					</Container>
+				</div>
+			</div>
+		)
+	}
+
+
+/*
+
 			<div className="Body">
         	    <div className="itempicture">
             		<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5GueTtKoNOiHAe0ExNxfXHiFJF6o4gc2Hng&usqp=CAU" class="img2"></img> 
