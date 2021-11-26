@@ -1,15 +1,10 @@
-import React, { Component } from "react";
-import axios from "axios";
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
-
-
-import Body from "./Components/AuctionPageBody";
+import React from "react";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import AuctionPageBody from "./Components/AuctionPageBody";
-import './index.css';
+//import './auctionpagebuyer.css'; //this is the styling file for auctionpagebuyer
 
 
-function App () {
+export default function AuctionPageBuyer () {
   
   return (
     <div className="App">
@@ -17,5 +12,4 @@ function App () {
     </div>
   ) //end return
 
-} //end function app
-export default App;
+}; //end function app
