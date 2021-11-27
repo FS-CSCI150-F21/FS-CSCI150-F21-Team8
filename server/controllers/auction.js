@@ -1,6 +1,6 @@
 import AuctionData from '../models/auction.js';
-import path from 'path'
-import cloudinary from '../cloudinary-cfg/cloudinary.js'
+// import path from 'path'
+// import cloudinary from '../cloudinary-cfg/cloudinary.js'
 // httpstatus.com for codes
 export const getAuction = async (req, res) => {
 

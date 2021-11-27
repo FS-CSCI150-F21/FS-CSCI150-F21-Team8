@@ -15,10 +15,10 @@ app.use(cors());
 app.use(express.json({limit: "50mb", extended: true}));
 app.use(express.urlencoded({limit: "50mb", extended: true}));
 
-app.use('/user', userRoutes); 
-app.use('/auction', auctionRoutes) // for auction routes later
+app.use('/user', userRoutes)
+app.use('/auction', auctionRoutes) 
 
-const URL = process.env.DB_URI;
+const URL = process.env.MONGODB_URI;
 const PORT = process.env.PORT || 5000;
 
 mongoose.connect(URL, {

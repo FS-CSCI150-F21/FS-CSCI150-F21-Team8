@@ -1,9 +1,9 @@
 import express from 'express'
-import multer from 'multer'
-import { v4 as uuidv4 } from 'uuid';
-import path from 'path'
+// import multer from 'multer'
+// import { v4 as uuidv4 } from 'uuid';
+// import path from 'path'
 import { createAuction, deleteAuction, getAuction, updateAuction } from '../controllers/auction.js'
-import cloudinary from '../cloudinary-cfg/cloudinary.js'
+// import cloudinary from '../cloudinary-cfg/cloudinary.js'
 
 
 const router = express.Router()

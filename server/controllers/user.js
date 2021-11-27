@@ -110,7 +110,6 @@ export const createUser = async (req, res) => {
     
     try {
         const user = req.body;
-        user.profilePicture = req.file.filename;
         const newUser = new UserData(user);
         await newUser.save()
         res.status(201).json(newUser);
