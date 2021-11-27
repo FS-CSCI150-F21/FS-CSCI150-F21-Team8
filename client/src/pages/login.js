@@ -1,21 +1,24 @@
-import React, { Component, useState, useEffect } from 'react'
+import React, { Component, useState, useEffect, useContext } from 'react'
 import axios from 'axios'
-
+import { AuthContext } from '../App';
 const Signin = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [user, setUser] = useState();
-	
+	const [authState, setAuthState] = useContext(AuthContext)
+	// console.log(test)
 	useEffect(() => {
 		const loggedInUser = localStorage.getItem("user");
 		if (loggedInUser){
 			const foundUser = JSON.parse(loggedInUser);
 			setUser(foundUser);
+			setAuthState(true)
 		}
 	}, []);
 	
 	const handleLogout = () => {
-		setUser({});
+		setAuthState(false)
+		setUser();
 		setEmail("");
 		setPassword("");
 		localStorage.clear();
@@ -25,16 +28,23 @@ const Signin = () => {
 		const user = { email, password };
 
 		document.getElementById("error").innerHTML = "";
-		axios.get('/user/login?email='+user.email+"&password="+user.password)
+		axios.get('https://bdh-server.herokuapp.com/user/login?email='+user.email+"&password="+user.password)
 				.then((response) => {
-					setUser(response.data);
-					if (response.data.message === "Passwords match") {localStorage.setItem("user", JSON.stringify(user))};
+					console.log(response.data._doc)
+					setUser(response.data._doc);
+					if (response.data.message === "Passwords match") {
+						// user.id = response.data._doc._id
+						localStorage.setItem("user", JSON.stringify(response.data._doc))
+						localStorage.setItem("email", JSON.stringify(response.data._doc.email))
+					};
+					setAuthState(true)
 				})
-				.catch(() => {
+				.catch((res) => {
 					if (user.password === "" && user.email === ""){document.getElementById("error").innerHTML = "Must provide email. <br> Must provide password."}
 					else if (user.email === ""){document.getElementById("error").innerHTML = "Must provide email."}
 					else if (user.password === ""){document.getElementById("error").innerHTML = "Must provide password."}
 					else{document.getElementById("error").innerHTML = "The email or password is incorrect. Please try again."}
+					console.log(res)
 				})
 	};
 	
@@ -50,9 +60,9 @@ const Signin = () => {
 	return (
 				<div className="login-wrap">
 					<div className="login-html">
-						<input id="tab-1" type="radio" name="tab" className="sign-in" checked/>
-						<label for="tab-1" className="tab"> Sign In</label>
-						<input id="tab-2" type="radio" name="tab" className="sign-up"/><label for="tab-2" className="tab">Sign up</label>
+						{/* <input id="tab-1" type="radio" name="tab" className="sign-in" checked/> */}
+						{/* <label for="tab-1" className="tab"> Sign In</label> */}
+						{/* <input id="tab-2" type="radio" name="tab" className="sign-up"/><label for="tab-2" className="tab">Sign up</label> */}
 							<form className="login-form" onSubmit={(e) => handleSubmit(e)}>
 								<div className="sign-in-htm">
 									<div className="group">

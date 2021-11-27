@@ -4,8 +4,27 @@ import React from 'react'
 import './img.css';
 import { Nav, NavLink, Bars, NavMenu, NavBtn, NavBtnLink } from './NavbarElements'
 import './img.css'
+import { useState, useEffect, useContext } from 'react';
+import { AuthContext } from '../../App';
 
 const Navbar = () => {
+    // if (authState) {
+    //     setAuthState(JSON.parse(localStorage.getItem("user")))
+    // }
+    const [authState, setAuthState] = useContext(AuthContext)
+    // console.log(authState)
+    // const [authState, setAuthState] = useState(JSON.parse(localStorage.getItem("user")))
+    // const user = JSON.parse(localStorage.getItem("user"))
+    // let authState = false;
+    // if (user) {
+    //     authState = true;
+    // }
+    // useEffect(()=> {
+    //     if (user) {
+    //         setAuthState(true)
+    //     }
+    //     console.log(user)
+    // })
     return (
         <>
             <Nav>
@@ -25,8 +44,10 @@ const Navbar = () => {
 
                 </NavMenu>
                 <NavBtn>
-                    <NavBtnLink to="/signup">SignUp</NavBtnLink>
-                    <NavBtnLink to="/login">Signin</NavBtnLink>
+                    {!authState && <NavBtnLink to="/signup">SignUp</NavBtnLink>}
+                    <NavBtnLink to="/login">{!authState ? "Sign In" : "Log Out"}</NavBtnLink>
+                    {authState && <NavBtnLink to="/createAuction">Create Auction</NavBtnLink>}
+                    {/* {user && <NavBtnLink to="/login">Log out</NavBtnLink>} */}
                 </NavBtn>
 
                 </Nav>

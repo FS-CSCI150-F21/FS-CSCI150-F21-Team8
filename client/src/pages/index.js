@@ -20,7 +20,7 @@ class App extends React.Component {
         {/*https://bdh-server.herokuapp.com/auction/get?num=10 */ }
         {/*http://localhost:5000/auction/get?num=20 */}
 
-        axios.get('https://bdh-server.herokuapp.com/auction/get?num=10')
+        axios.get('https://bdh-server.herokuapp.com/auction/get?num=20')
             .then((response) => {
                 const data = response.data;
                 this.setState({ posts: data });
@@ -44,7 +44,7 @@ class App extends React.Component {
                     {/*    {Array.from({ length: 2 }).map((_, idx) => ( */}
                     <Col>
                             <Card>
-                                <Card.Img variant="top" src="holder.js/100px160" />
+                                <Card.Img variant="top" src={post.auctionImages}/>
                                 <Card.Body>
                                     <Card.Title>{post.auctionName}</Card.Title>
                                     <Card.Text>
@@ -56,7 +56,7 @@ class App extends React.Component {
 
                     <Col>
                         <Card>
-                            <Card.Img variant="top" src="holder.js/100px160" />
+                            <Card.Img variant="top" src={post.auctionImages} />
                             <Card.Body>
                                 <Card.Title>{post.auctionName}</Card.Title>
                                 <Card.Text>

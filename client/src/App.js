@@ -8,11 +8,18 @@ import Signup from './pages/signup';
 import Signin from './pages/login';
 import Create from './pages/createAuction'
 import AuctionPageBuyer from './pages/auctionpagebuyer';
+import {useState} from 'react'
+
+export const AuthContext = React.createContext()
 
 function App() {
+  const [authState, setAuthState] = useState(localStorage.getItem("user") ? true : false)
+
   return (
     <Router>
-          <Navbar />
+          
+          <AuthContext.Provider value={[authState, setAuthState]}>
+              <Navbar/>
           <Switch>
               <Route path="/" exact component={Home} />
               <Route path="/about" component={About} /> 
@@ -21,6 +28,7 @@ function App() {
               <Route path="/createAuction" component={Create} />
               <Route path="/auctionpagebuyer" component={AuctionPageBuyer} />
            </Switch>
+           </AuthContext.Provider>
     </Router>
   );
 }

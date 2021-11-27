@@ -5,6 +5,7 @@ import axios from 'axios'
 // import Button from '@mui/material/Button'
 // import { MenuItem, FormControl, Checkbox, FormControlLabel, Select, InputLabel, formGroupClasses } from '@mui/material'
 import '../App.css';
+import { Redirect } from 'react-router';
 // import { width } from '@mui/system'
 const validateInputs = (auction) => {
     // console.log(auction)
@@ -14,7 +15,6 @@ const validateInputs = (auction) => {
     || auction.auctionImages === ''
     || auction.tags[0] === '' || auction.tags[1] === ''
     || auction.condition === '' 
-    || auction.images === ''
     || (isNaN(auction.startingBid))
     ) {
         return true
@@ -26,52 +26,83 @@ const validateInputs = (auction) => {
 
 export default function Create() {
 
-
+    const user = JSON.parse(localStorage.getItem('user'))
+    // console.log(user)
     const [auction, setAuction] = useState({
         auctionName: '',
         auctionDescription: '',
         auctionImages: '',
-        author: '61908fbc6fbb7fd5a70545ec',
+        author: user ? user._id : '',
         tags: ['',''],
         condition: '',
         startingBid: '',
     })
 
+    // console.log(auction)
+    if (user === undefined) {
+        return <Redirect to="/login"/>
+    }
+    
     
 
     const createAuction = (event) => {
         event.preventDefault();
+
+        
         // setAuction({...auction, author: '61908fbc6fbb7fd5a70545ec'})
-        const put_params = {
-            currentAuctions: ''
-        }
-        const form = new FormData();
-        form.append('auctionName', auction.auctionName)
-        form.append('auctionDescription', auction.auctionDescription)
-        form.append('auctionImages', auction.auctionImages)
-        form.append('author', auction.author)
-        form.append('tags', auction.tags)
-        form.append('condition', auction.condition)
-        form.append('startingBid', auction.startingBid)
-        console.log('form', form)
-        console.log(auction)
+        
+        
+        
+        
         if (validateInputs(auction)){
             console.log('Something is blank or the starting bid is not a number')
         } else {
-            
-            axios.post('http://localhost:5000/auction/', form).then((res)=>{
-                console.log('post')
-                console.log(res)
-                put_params.currentAuctions = res.data._id
-                console.log(put_params)
-            }).then(()=>{
-                axios.put(`http://localhost:5000/user/${auction.author}`, put_params).then(()=>{
-                    console.log('put')
+            const put_params = {
+                currentAuctions: ''
+            }
+            const iform = new FormData();
+            iform.append("file", auction.auctionImages)
+            iform.append("upload_preset", "auction")
+            const post_body = auction;
+            let url = ''
+            axios.post("https://api.cloudinary.com/v1_1/bdh-images/image/upload", iform).then((res)=>{
+                console.log(res.data.url)
+                url = res.data.url
+                setAuction({...auction, auctionImages: url})
+                post_body.auctionImages = url
+                console.log(post_body)
+                // console.log(auction)
+                axios.post('https://bdh-server.herokuapp.com/auction/', post_body).then((res)=>{
+                    console.log('post')
+                    console.log(res)
+                    put_params.currentAuctions = res.data._id
+                    console.log(put_params)
+                    axios.put(`https://bdh-server.herokuapp.com/user/${auction.author}`, put_params).then(()=>{
+                        console.log('put')
+                    })
                 })
-            }).catch(()=>{
-
-                console.log('caught')
+            }).catch((res)=>{
+                console.log('caught', res)
             })
+            // .then(()=>{
+                
+            //     // const form = new FormData();
+            //     // form.append('auctionName', auction.auctionName)
+            //     // form.append('auctionDescription', auction.auctionDescription)
+            //     // form.append('auctionImages', url)
+            //     // form.append('author', auction.author)
+            //     // form.append('tags', auction.tags)
+            //     // form.append('condition', auction.condition)
+            //     // form.append('startingBid', auction.startingBid)
+            //     // console.log('form', form)
+                
+            // })
+            // .then(()=>{
+                
+            // }).catch((res)=>{
+    
+            //     console.log('caught', res)
+            // })
         }
         
         // console.log(auction)
@@ -86,6 +117,7 @@ export default function Create() {
             <div>
                 <img src = {auction.auctionImages} alt = {""}></img>
             </div>
+            {/*   */}
             <form onSubmit={createAuction} encType="multipart/form-data">
                 <div>
                 <input  
@@ -126,6 +158,8 @@ export default function Create() {
                         placeholder="Description"
                         name="auctionDescription"
                         value={auction.auctionDescription}
+                        rows="5"
+                        cols="100"
                         onChange={(event)=>{
                             setAuction({...auction, auctionDescription: event.target.value})
                         }}
