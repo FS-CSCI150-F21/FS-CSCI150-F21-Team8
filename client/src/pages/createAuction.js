@@ -178,6 +178,9 @@ export default function Create() {
                         <option value="Biology">Biology</option>
                         <option value="Chemistry">Chemistry</option>
                         <option value="Computer Engineering">Computer Engineering</option>
+                        <option value="Mathematics">Mathematics</option>
+                        <option value="Philosophy">Philosophy</option>
+                        <option value="History">History</option>
                         <option value="Other">Other</option>
 
                     </select>

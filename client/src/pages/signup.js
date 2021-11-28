@@ -41,7 +41,7 @@ class App extends Component {
             password: this.state.password
         }
 
-        axios.post("http://localhost:5000/user", registered)
+        axios.post("https://bdh-server.herokuapp.com/user", registered)
             .then(response => console.log(response.data))
 
         window.location = '/'; {/*should return person home */}

@@ -37,7 +37,6 @@ const Navbar = () => {
 
                 <NavMenu>
                  <NavLink to="/about" activeStyle >Help</NavLink>
-                 <NavLink to="/createAuction" activeStyle >createAuction</NavLink>
                 </NavMenu>
 
                 <NavBtn>
