@@ -1,6 +1,7 @@
 import React, { Component, useState, useEffect, useContext } from 'react'
 import axios from 'axios'
 import { AuthContext } from '../App';
+import { Link } from 'react-router-dom';
 const Signin = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -36,8 +37,9 @@ const Signin = () => {
 						// user.id = response.data._doc._id
 						localStorage.setItem("user", JSON.stringify(response.data._doc))
 						localStorage.setItem("email", JSON.stringify(response.data._doc.email))
+						setAuthState(true)
 					};
-					setAuthState(true)
+					
 				})
 				.catch((res) => {
 					if (user.password === "" && user.email === ""){document.getElementById("error").innerHTML = "Must provide email. <br> Must provide password."}
@@ -92,7 +94,8 @@ const Signin = () => {
 									</div>
 									<div className="hr"></div>
 									<div className="foot-lnk">
-										<a href="#forgot"> Forgot Password?</a>
+										{/* <a href="#forgot"> Forgot Password?</a> */}
+										<Link to="/forgot">Forgot Password?</Link>
 									</div>
 								</div>
 							</form>

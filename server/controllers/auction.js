@@ -80,8 +80,16 @@ export const deleteAuction = async (req, res) => {
 
 export const updateAuction = async (req, res) => {
     try {
-        // console.log(req.body)
-        const auction = await AuctionData.findOne({id: req.params.id}).exec()
+        // console.log(req.query.id)
+        let query = AuctionData.find()
+        if (req.query.id) {
+            query.where("_id", `${req.query.id}`)
+        }
+        if (req.query.email) {
+            query.where('email', `${req.query.email}`)
+        }
+        // console.log(req.query)
+        const auction = await AuctionData.findOne(query).exec()
         if (req.body.auctionDescription){
             auction.auctionDescription = req.body.auctionDescription
         }

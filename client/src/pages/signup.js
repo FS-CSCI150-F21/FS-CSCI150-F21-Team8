@@ -42,9 +42,14 @@ class App extends Component {
         }
 
         axios.post("https://bdh-server.herokuapp.com/user", registered)
-            .then(response => console.log(response.data))
+            .then((response) => {
+                console.log(response.data)
+                window.location = '/login';
+            }).catch((res)=>{
+                console.log(res)
+            })
 
-        window.location = '/'; {/*should return person home */}
+        {/*should return person home */}
     }
     render() {
         return (

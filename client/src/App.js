@@ -10,6 +10,8 @@ import Create from './pages/createAuction'
 import AuctionPageBuyer from './pages/auctionpagebuyer';
 import AuctionPageSeller from './pages/auctionpageseller';
 import {useState} from 'react'
+import Forgot from './pages/forgot'
+import Verify from './pages/verify';
 
 export const AuthContext = React.createContext()
 
@@ -26,6 +28,8 @@ function App() {
               <Route path="/about" component={About} /> 
               <Route path="/signup" component={Signup} />
               <Route path="/login" component={Signin} />
+              <Route path="/forgot" component={Forgot} />
+              <Route path="/verify" component={Verify} />
               <Route path="/createAuction" component={Create} />
               <Route path="/auctionpagebuyer" component={AuctionPageBuyer} />
               <Route path="/auctionpageseller" component={AuctionPageSeller} />

@@ -207,22 +207,22 @@ export const updateUser = async (req, res) => {
         // console.log(req.query)
         const user = await UserData.findOne(query).exec()
         // console.log(user)
-        if (req.query.currentAuctions){
+        if (req.body.currentAuctions){
             user.currentAuctions.push(req.body.currentAuctions)
         }
-        if (req.query.currentBids) {
+        if (req.body.currentBids) {
             user.currentBids.push(req.body.currentBids)
         }
-        if (req.query.displayName){
+        if (req.body.displayName){
             user.displayName = req.body.displayName
         }
-        if (req.query.password) {
-            user.password = req.query.password
+        if (req.body.password) {
+            user.password = req.body.password
         }
-        if (req.query.rating) {
+        if (req.body.rating) {
             user.rating = req.body.rating
         }
-        if (req.query.profilePicture) {
+        if (req.body.profilePicture) {
             user.profilePicture = req.body.profilePicture
         }
         await user.save()
