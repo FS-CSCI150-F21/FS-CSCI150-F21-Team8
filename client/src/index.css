@@ -11,3 +11,84 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+html{
+	height: 100%;
+}
+body{
+	margin: 0;
+	height: 100%;
+	width: 100%
+}
+
+/* stylings for auctionpageseller/buyer*/
+.img2 {
+	width: 500px;
+	height: 600px;
+	border: 5px solid #13284C;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	border-radius: 25px;
+}
+
+.imgnb {
+    width:100px;
+    height:50px;
+}
+
+.Body {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+    background-color: #babec2;
+}
+.ProductDescription {
+	width: 600px;
+	height: 600px;
+	border: 5px solid #13284C;
+	background-color: #FFFFFF;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	border-radius: 25px;
+}
+
+table {
+	width: 300px;
+	margin-top: 20px;
+	margin-left: 10px;
+	margin-right: 0px;
+	justify-content: center;
+	padding-top: 20px;
+
+}
+td {
+	padding: 10px;
+	text-align: center;
+	font-size: 25px;
+}
+
+button {
+	background-color: #13284C;
+	color: white;
+	border-radius: 25px;
+	padding: 5px 55px;
+}
+a{
+	text-decoration: none;
+}
+a:hover {
+		text-decoration: underline;
+}
+
+.link td {
+	font-size: 15px;
+}
+
+input {
+	font-family: Verdana;
+	letter-spacing: 0.125em;
+	padding: 7px 0px;
+}
+
+/*stylings for ... */

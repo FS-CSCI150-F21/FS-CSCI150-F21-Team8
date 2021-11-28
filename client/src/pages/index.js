@@ -4,6 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
+import { Nav, NavLink, Bars, NavMenu, NavBtn, NavBtnLink } from '../components/Navbar/NavbarElements'
+
 
 
 class App extends React.Component {
@@ -40,7 +42,7 @@ class App extends React.Component {
             <div key={index}>
 
                 {/*card try*/}
-                <Row xs={1} md={2} className="g-4">
+                <Row xs={2} md={2} className="g-4">
                     {/*    {Array.from({ length: 2 }).map((_, idx) => ( */}
                     <Col>
                             <Card>
@@ -49,6 +51,13 @@ class App extends React.Component {
                                     <Card.Title>{post.auctionName}</Card.Title>
                                     <Card.Text>
                                         {post.auctionDescription}
+                                        <NavLink to={{
+                                            pathname: '/auctionpagebuyer',
+                                            state: {auction: post}
+                                        }}>
+                                            See Details
+                                        </NavLink>
+
                                     </Card.Text>
                                 </Card.Body>
                             </Card>

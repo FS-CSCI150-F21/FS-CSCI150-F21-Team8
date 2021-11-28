@@ -37,12 +37,9 @@ const Navbar = () => {
 
                 <NavMenu>
                  <NavLink to="/about" activeStyle >Help</NavLink>
-
-                    {/*<NavLink to="/signup" activeStyle>SignUp</NavLink>*/}
-                    {/*<NavLink to="/login" activeStyle>Login</NavLink>*/}
-
-
+                 <NavLink to="/createAuction" activeStyle >createAuction</NavLink>
                 </NavMenu>
+
                 <NavBtn>
                     {!authState && <NavBtnLink to="/signup">SignUp</NavBtnLink>}
                     <NavBtnLink to="/login">{!authState ? "Sign In" : "Log Out"}</NavBtnLink>
