@@ -1,6 +1,9 @@
 import UserData from '../models/user.js';
 import bcrypt from 'bcrypt';
-
+import OtpData from '../models/otp.js';
+import nodemailer from 'nodemailer'
+import dotenv from 'dotenv'
+dotenv.config()
 const handleErrors = (error) => {
     let error_message = {}
     if (error.code === 11000) {
@@ -90,10 +93,11 @@ export const loginUser = async (req, res) => {
         if (req.query.email) {
             query.where('email', `${req.query.email}`)
         }
-        const user = await UserData.findOne(query).sort({'joinDate': 1}).limit(1).exec()
+        const user = await UserData.findOne(query).exec()
         if (user === null) {
             throw new Error("No account exists with the given id or email")
         }
+        // console.log(user)
         const pass_check = bcrypt.compareSync(req.query.password, user.password)
 
         if (pass_check) {
@@ -129,34 +133,100 @@ export const deleteUser = async (req, res) => {
     }
 }
 
+export const createOtpUser = async (req, res) => {
+    try {
+        const email = req.body.email
+        const otp = Math.floor(Math.random() * (9999 - 1000) + 1000);
+        const newOtp_obj = {
+            email: email,
+            otp: otp
+        }
+        const newOtp = new OtpData(newOtp_obj)
+        await newOtp.save()
+        const transporter = nodemailer.createTransport({
+            host: "smtp-mail.outlook.com",
+            secureConnection: false, 
+            port: 587, 
+            auth: {
+                user: process.env.EMAIL,
+                pass: process.env.EMAIL_PW
+            },
+            tls: {
+                ciphers:'SSLv3'
+            }
+        })
+
+        const mailOptions = {
+            from: 'bulldogauctionhouse@outlook.com',
+            to: 'danieladam5656@gmail.com',
+            subject: 'Reset Password',
+            text: `Here is your verification code: ${otp}\nThis will expire in 5 minutes.`
+        }
+        await transporter.sendMail(mailOptions)
+        res.status(200).json(newOtp)
+    } catch (error) {
+        res.status(500).json({message: error.message})    
+    }
+}
+
+export const checkUser = async (req, res) => {
+    try {
+        let query = OtpData.find()
+        if (req.query.email) {
+            query.where('email', `${req.query.email}`)
+        } else {
+            throw new Error("Email must be provided")
+        }
+        if (req.query.otp){
+            query.where('otp', `${req.query.otp}`)
+        } else {
+            throw new Error("Otp must be provided")
+        }
+        const check = await OtpData.findOne(query).exec()
+        // console.log(check)
+        if (check) {
+            res.status(200).json({message: "Success"})
+        } else {
+            throw new Error("Fail")
+        }
+    } catch (error) {
+        res.status(500).json({message: error.message})    
+    }
+}
+
 export const updateUser = async (req, res) => {
     try {
-        let v = true;
-        console.log(req.params.id, req.body)
-        const user = await UserData.findOne({_id: req.params.id}).exec()
+        // console.log(req.query.id)
+        let query = UserData.find()
+        if (req.query.id) {
+            query.where("_id", `${req.query.id}`)
+        }
+        if (req.query.email) {
+            query.where('email', `${req.query.email}`)
+        }
+        // console.log(req.query)
+        const user = await UserData.findOne(query).exec()
         // console.log(user)
-        if (req.body.currentAuctions){
+        if (req.query.currentAuctions){
             user.currentAuctions.push(req.body.currentAuctions)
         }
-        if (req.body.currentBids) {
+        if (req.query.currentBids) {
             user.currentBids.push(req.body.currentBids)
         }
-        if (req.body.displayName){
+        if (req.query.displayName){
             user.displayName = req.body.displayName
         }
-        if (req.body.email) {
-            user.email = req.body.email
+        if (req.query.password) {
+            user.password = req.query.password
         }
-        if (req.body.password) {
-            user.password = req.body.password
-        }
-        if (req.body.rating) {
+        if (req.query.rating) {
             user.rating = req.body.rating
         }
-        if (req.body.profilePicture) {
+        if (req.query.profilePicture) {
             user.profilePicture = req.body.profilePicture
         }
         await user.save()
+        res.status(200).json({message: "Success"})
     } catch (error) {
         res.status(404).json({message: error.message})
     }
