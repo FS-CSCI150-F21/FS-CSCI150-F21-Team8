@@ -3,13 +3,12 @@ import AuctionPageBody from "../components/AuctionPageBody";
 
 
 
-function App () {
-  
+export default function AuctionPageBuyer () {
+
   return (
-    <div className="App">
+ 
       <AuctionPageBody />
-    </div>
+
   ) //end return
 
-} //end function app
-export default App;
+}; //end function AuctionPageBuyer
