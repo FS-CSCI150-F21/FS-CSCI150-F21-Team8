@@ -5,6 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import { Nav, NavLink, Bars, NavMenu, NavBtn, NavBtnLink } from '../components/Navbar/NavbarElements'
+import styled from 'styled-components';
 
 
 
@@ -55,7 +56,7 @@ class App extends React.Component {
                                             pathname: '/auctionpagebuyer',
                                             state: {auction: post}
                                         }}>
-                                            See Details
+                                            Place Bid
                                         </NavLink>
 
                                     </Card.Text>
@@ -64,18 +65,23 @@ class App extends React.Component {
                     </Col>
 
                     <Col>
-                        <Card>
-                            <Card.Img variant="top" src={post.auctionImages} />
-                            <Card.Body>
-                                <Card.Title>{post.auctionName}</Card.Title>
-                                <Card.Text>
-                                    {post.auctionDescription}
-                                </Card.Text>
-                            </Card.Body>
-                        </Card>
-                    </Col>
+                            <Card>
+                                <Card.Img variant="top" src={post.auctionImages}/>
+                                <Card.Body>
+                                    <Card.Title>{post.auctionName}</Card.Title>
+                                    <Card.Text>
+                                        {post.auctionDescription}
+                                        <NavLink to={{
+                                            pathname: '/auctionpagebuyer',
+                                            state: {auction: post}
+                                        }}>
+                                            Place Bid
+                                        </NavLink>
 
-                    {/* ))}  */}
+                                    </Card.Text>
+                                </Card.Body>
+                            </Card>
+                    </Col>
                 </Row>
             </div>)
         );
@@ -84,7 +90,7 @@ class App extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="homeBody">
                 <h1>Home</h1>
                 <div>
                     {this.display(this.state.posts)}
