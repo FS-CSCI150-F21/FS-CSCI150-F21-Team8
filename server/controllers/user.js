@@ -93,10 +93,11 @@ export const loginUser = async (req, res) => {
         if (req.query.email) {
             query.where('email', `${req.query.email}`)
         }
-        const user = await UserData.findOne(query).sort({'joinDate': 1}).limit(1).exec()
+        const user = await UserData.findOne(query).exec()
         if (user === null) {
             throw new Error("No account exists with the given id or email")
         }
+        // console.log(user)
         const pass_check = bcrypt.compareSync(req.query.password, user.password)
 
         if (pass_check) {
@@ -182,7 +183,7 @@ export const checkUser = async (req, res) => {
             throw new Error("Otp must be provided")
         }
         const check = await OtpData.findOne(query).exec()
-        console.log(check)
+        // console.log(check)
         if (check) {
             res.status(200).json({message: "Success"})
         } else {
@@ -195,6 +196,7 @@ export const checkUser = async (req, res) => {
 
 export const updateUser = async (req, res) => {
     try {
+        // console.log(req.query.id)
         let query = UserData.find()
         if (req.query.id) {
             query.where("_id", `${req.query.id}`)
@@ -202,7 +204,7 @@ export const updateUser = async (req, res) => {
         if (req.query.email) {
             query.where('email', `${req.query.email}`)
         }
-        console.log(req.query)
+        // console.log(req.query)
         const user = await UserData.findOne(query).exec()
         // console.log(user)
         if (req.query.currentAuctions){
@@ -214,19 +216,8 @@ export const updateUser = async (req, res) => {
         if (req.query.displayName){
             user.displayName = req.body.displayName
         }
-        if (req.query.email) {
-            user.email = req.body.email
-        }
         if (req.query.password) {
-            const reg = new RegExp(`${user.displayName}`, 'i')
-            if (reg.test(req.query.password)) {
-                let error = new Error('Password must not include the display name')
-                error.code = 'PASSWORD_ERROR_DSP'
-                throw error
-            } else {
-                const salt = bcrypt.genSaltSync(10);
-                user.password = await bcrypt.hash(req.query.password, salt)
-            }
+            user.password = req.query.password
         }
         if (req.query.rating) {
             user.rating = req.body.rating
