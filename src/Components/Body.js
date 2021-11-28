@@ -1,10 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import { Button, Container, Form, Image, Row, Col } from 'react-bootstrap';
 
 
 export default class Body extends React.Component {
@@ -23,7 +19,8 @@ export default class Body extends React.Component {
 	}
 
 	componentDidMount() {
-			axios.get('http://localhost:5000/user/get?email=test7@gmail.com')
+			// axios.get('http://localhost:5000/user/get?email=test7@gmail.com')
+			axios.get('https://bdh-server.herokuapp.com/user/get?email=test7@gmail.com')
 				.then((response) => {
 					console.log(response.data);
 					
@@ -46,80 +43,17 @@ export default class Body extends React.Component {
 
 	render() {	
 		return (
-			// <div className="Body">
-			// 	<div className="userProfilePicture">
-			// 		<img src="https://st2.depositphotos.com/1104517/11967/v/950/depositphotos_119675554-stock-illustration-male-avatar-profile-picture-vector.jpg" class="img2"></img>
-	
-			// 		<tr className="update picture">
-			// 			<td> </td>
-			// 			<td></td>
-			// 			<td></td>
-			// 			<td></td>
-			// 			<td>
-			// 				<button> Update Picture </button>
-			// 			</td>
-			// 		</tr>
-	
-			// 		<tr className="displayUserName">
-			// 			<td></td>
-			// 			<td></td>
-			// 			<td></td>
-			// 			<td></td>
-			// 			<td> John Doe </td>
-			// 		</tr>
-			// 	</div>
-	
-			// 	<div className="userInfo">
-			// 		<table>
-			// 			<tr className="userName">
-			// 				<td> UserName </td>
-			// 				<td colSpan="2"> <input type="text" value={this.state.displayName} readOnly="readyOnly"></input></td>
-			// 			</tr>
-	
-			// 			{/* <tr className="Password">
-			// 				<td> Password </td>
-			// 				<td colSpan="2"> <input type="text" value={this.state.password} readOnly="readyOnly"></input></td>
-			// 			</tr>
-	
-			// 			<tr className="forgotPassword">
-			// 				<td></td>
-			// 				<input type="text" value={this.state.password} readOnly="readyOnly"></input>
-			// 			</tr> */}
-	
-			// 			<tr className="ProfileBio">
-			// 				<td> Profile Bio (optional) </td>
-			// 				<td colSpan="2"> <input type="text" value={this.state.description} readOnly="readyOnly"></input></td>
-			// 			</tr>
-	
-			// 			<tr className="Rating">
-			// 				<td> Rating </td>
-			// 				<td colSpan="2"> <input type="text" value={this.state.rating} readOnly="readyOnly"></input></td>
-			// 			</tr>
-	
-			// 			<tr className="Email">
-			// 				<td> Email </td>
-			// 				<td colSpan="2"> <input type="text" value = {this.state.email} readOnly="readyOnly" ></input></td>
-			// 			</tr>
-	
-			// 			<tr className="PhoneNumber">
-			// 				<td> Phone Number </td>
-			// 				<td colSpan="2"> <input type="text" value={this.state.phoneNumber} readOnly="readyOnly"></input></td>
-			// 			</tr>
-	
-			// 			<tr className="editProfileOption">
-			// 				<td> </td>
-			// 				<td>
-			// 					<button> Edit your Profile</button>
-			// 				</td>
-			// 			</tr>
-			// 		</table>
-	
-			// 	</div>
-			// </div>
 
 			<Container>
+				<Row>
+				<Col xs={6} md={4}>
+				<a href=""><img src="https://st2.depositphotos.com/1104517/11967/v/950/depositphotos_119675554-stock-illustration-male-avatar-profile-picture-vector.jpg" class="img2"></img></a>
+				{/* <Image src="https://st2.depositphotos.com/1104517/11967/v/950/depositphotos_119675554-stock-illustration-male-avatar-profile-picture-vector.jpg" thumbnail /> */}
+				{/* <Button variant="primary">Change Profile Picture</Button>{' '} */}
+				</Col>
+
+				<Col>
 				<Form>
-				
 				<Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
 					<Form.Label column sm="2">
 					User Name
@@ -143,7 +77,8 @@ export default class Body extends React.Component {
 					Password
 					</Form.Label>
 					<Col sm="10">
-					<Form.Control type="password" placeholder={this.state.description} />
+					{/* <Form.Control type="password" placeholder={this.state.description} /> */}
+					<Button variant="primary">Change your Password</Button>{' '}
 					</Col>
 				</Form.Group>
 
@@ -173,10 +108,18 @@ export default class Body extends React.Component {
 					<Form.Control plaintext readOnly defaultValue={this.state.phoneNumber} />
 					</Col>
 				</Form.Group>
-				
-				</Form>
-
 				<Button variant="primary">Edit your Profile</Button>{' '}
+				</Form>
+				</Col>
+				{/* <Button variant="primary">Edit your Profile</Button>{' '} */}
+				</Row>
+
+				<Row>
+				<Col>
+				<Button variant="primary">Change Profile Picture</Button>{' '}
+				</Col>
+				</Row>
+
 			</Container>
 		);
 	}
