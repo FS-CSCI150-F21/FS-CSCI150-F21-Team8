@@ -72,7 +72,7 @@ class App extends React.Component {
                                     <Card.Text>
                                         {post.auctionDescription}
                                         <NavLink to={{
-                                            pathname: '/auctionpagebuyer',
+                                            pathname: '/auctionpageseller',
                                             state: {auction: post}
                                         }}>
                                             Place Bid
