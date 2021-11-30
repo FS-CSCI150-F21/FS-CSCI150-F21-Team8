@@ -6,10 +6,11 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import { Nav, NavLink, Bars, NavMenu, NavBtn, NavBtnLink } from '../components/Navbar/NavbarElements'
 import styled from 'styled-components';
+import { Grid, Typography } from '@mui/material';
 
 
 
-class App extends React.Component {
+class Home extends React.Component {
 
     state = {
         auctionName: '',
@@ -40,17 +41,13 @@ class App extends React.Component {
         if (!posts.length) return null;
 
         return posts.map((post, index) => (
-            <div key={index}>
+            <Grid key={index} xs={12} sm={6} md={4} lg={3}>
 
-                {/*card try*/}
-                <Row xs={2} md={2} className="g-4">
-                    {/*    {Array.from({ length: 2 }).map((_, idx) => ( */}
-                    <Col>
                             <Card>
                                 <Card.Img variant="top" src={post.auctionImages}/>
                                 <Card.Body>
                                     <Card.Title>{post.auctionName}</Card.Title>
-                                    <Card.Text>
+                                    <Typography variant="body2" color="textSecondar">
                                         {post.auctionDescription}
                                         <NavLink to={{
                                             pathname: '/auctionpagebuyer',
@@ -59,12 +56,11 @@ class App extends React.Component {
                                             Place Bid
                                         </NavLink>
 
-                                    </Card.Text>
+                                    </Typography>
                                 </Card.Body>
                             </Card>
-                    </Col>
-                </Row>
-            </div>)
+    
+            </Grid>)
         );
     };
 
@@ -73,12 +69,12 @@ class App extends React.Component {
         return (
             <div className="homeBody">
                 <h1>Home</h1>
-                <div>
+                <Grid container justify="center" spacing={4}>
                     {this.display(this.state.posts)}
-                </div>
+                </Grid>
             </div>
         )
     }
 }
 
-export default App
+export default Home
