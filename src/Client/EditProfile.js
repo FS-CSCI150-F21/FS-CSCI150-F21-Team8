@@ -29,7 +29,7 @@ function EditProfile() {
 		  profilePicture: profilePicture
 		  
 		}
-		axios.put('https://bdh-server.herokuapp.com/user/get?email=test1@gmail.com', data).then(res => {
+		axios.put('https://bdh-server.herokuapp.com/user/update?email=test1@gmail.com', data).then(res => {
 		  setData(res.data);
 		  setDisplayName('');
 		  setEmail('');
@@ -107,7 +107,7 @@ function EditProfile() {
 					value={displayName}
 					onChange={e => setDisplayName(e.target.value)} />
 					{/* <Col sm="10"> */}
-					<Form.Control plaintext defaultValue= "" /> 
+					{/* <Form.Control plaintext defaultValue= "" />  */}
 					</Col>
 					{/* <Form.Label column sm="2">
 					User Name
@@ -128,7 +128,7 @@ function EditProfile() {
 					placeholder="Change email"
 					value={email}
 					onChange={e => setEmail(e.target.value)} />
-					<Form.Control plaintext defaultValue= "" /> 
+					{/* <Form.Control plaintext defaultValue= "" />  */}
 					</Col>
 					</Form.Group>
 
@@ -144,7 +144,7 @@ function EditProfile() {
 					placeholder="Change password"
 					value={password}
 					onChange={e => setPassword(e.target.value)} />
-					<Form.Control plaintext defaultValue= "" /> 
+					{/* <Form.Control plaintext defaultValue= "" />  */}
 					</Col>
 					</Form.Group>
 
@@ -160,7 +160,7 @@ function EditProfile() {
 					placeholder="Change Profile Bio"
 					value={description}
 					onChange={e => setDescription(e.target.value)} />
-					<Form.Control plaintext defaultValue= "" /> 
+					{/* <Form.Control plaintext defaultValue= "" />  */}
 					</Col>
 					</Form.Group>
 
@@ -176,7 +176,7 @@ function EditProfile() {
 					placeholder="view rating"
 					value={rating}
 					onChange={e => setRating(e.target.value)} />
-					<Form.Control plaintext defaultValue= "" /> 
+					{/* <Form.Control plaintext defaultValue= "" />  */}
 					</Col>
 					</Form.Group>
 
@@ -192,7 +192,7 @@ function EditProfile() {
 					placeholder="Change Phone Number"
 					value={phoneNumber}
 					onChange={e => setPhoneNumber(e.target.value)} />
-					<Form.Control plaintext defaultValue= "" /> 
+					{/* <Form.Control plaintext defaultValue= "" />  */}
 					</Col>
 					</Form.Group>
 
