@@ -116,7 +116,7 @@ function EditProfile() {
 					<Form.Control plaintext defaultValue={this.state.displayName} /> */}
 				</Form.Group>
 
-				<Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
+				{/* <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
 					<Form.Label column sm="2">
 					Email
 					</Form.Label>
@@ -128,9 +128,8 @@ function EditProfile() {
 					placeholder="Change email"
 					value={email}
 					onChange={e => setEmail(e.target.value)} />
-					{/* <Form.Control plaintext defaultValue= "" />  */}
 					</Col>
-					</Form.Group>
+					</Form.Group> */}
 
 				<Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
 					<Form.Label column sm="2">
@@ -164,7 +163,7 @@ function EditProfile() {
 					</Col>
 					</Form.Group>
 
-				<Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
+				{/* <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
 					<Form.Label column sm="2">
 					Rating
 					</Form.Label>
@@ -176,9 +175,8 @@ function EditProfile() {
 					placeholder="view rating"
 					value={rating}
 					onChange={e => setRating(e.target.value)} />
-					{/* <Form.Control plaintext defaultValue= "" />  */}
 					</Col>
-					</Form.Group>
+					</Form.Group> */}
 
 				<Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
 					<Form.Label column sm="2">
