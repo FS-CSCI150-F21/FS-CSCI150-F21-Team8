@@ -63,25 +63,6 @@ class App extends React.Component {
                                 </Card.Body>
                             </Card>
                     </Col>
-
-                    <Col>
-                            <Card>
-                                <Card.Img variant="top" src={post.auctionImages}/>
-                                <Card.Body>
-                                    <Card.Title>{post.auctionName}</Card.Title>
-                                    <Card.Text>
-                                        {post.auctionDescription}
-                                        <NavLink to={{
-                                            pathname: '/auctionpageseller',
-                                            state: {auction: post}
-                                        }}>
-                                            Place Bid
-                                        </NavLink>
-
-                                    </Card.Text>
-                                </Card.Body>
-                            </Card>
-                    </Col>
                 </Row>
             </div>)
         );
