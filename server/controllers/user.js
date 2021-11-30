@@ -157,8 +157,8 @@ export const createOtpUser = async (req, res) => {
         })
 
         const mailOptions = {
-            from: 'bulldogauctionhouse@outlook.com',
-            to: 'danieladam5656@gmail.com',
+            from: process.env.EMAIL,
+            to: email,
             subject: 'Reset Password',
             text: `Here is your verification code: ${otp}\nThis will expire in 5 minutes.`
         }
