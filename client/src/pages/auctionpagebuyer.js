@@ -1,5 +1,4 @@
-import React, {useState,useEffect} from 'react'
-import Button from 'react-bootstrap/Button';
+import React, {useState,useEffect} from 'react';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
@@ -21,7 +20,6 @@ const labels = {
 	4.5: 'Excellent',
 	5: 'Excellent+'
 };
-const value = 3;
 
 export default function AuctionPageBuyer () {
 
@@ -38,10 +36,12 @@ export default function AuctionPageBuyer () {
 		axios.get(`https://bdh-server.herokuapp.com/user/get?id=${location.state.auction.author}`) //retrieve auction's user information
 		 .then((response) => {
 			 console.log(response.data)
-			 setUser({...user, _id: response.data[0]._id});
-			 setUser({...user, displayName: response.data[0].displayName});
-			 setUser({...user, rating: response.data[0].rating});
+			//  setUser({...user, _id: response.data[0]._id});
+			//  setUser({...user, displayName: response.data[0].displayName});
+			//  setUser({...user, rating: response.data[0].rating});
+			setUser(response.data[0])
 			 console.log("gathered Author Data")
+			 console.log(user)
 		 })
 		 .catch(() => {
 			 console.log("user data has not been received");
@@ -52,6 +52,10 @@ export default function AuctionPageBuyer () {
 		getUserInfo();
 	}, []);
   
+
+	/**********************Redirect Auction Page Logic **********************/
+
+
   	return (
     	<div className="Body">
         	<div className="itempicture">
@@ -90,8 +94,8 @@ export default function AuctionPageBuyer () {
 
 					</Form>
 				</Container>
-			</div>
-		</div>
+			</div> 
+		</div> //end Body 
 
   	) //end return
 }; //end function AuctionPageBuyer

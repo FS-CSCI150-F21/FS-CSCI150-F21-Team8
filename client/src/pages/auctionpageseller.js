@@ -61,6 +61,12 @@ export default function AuctionPageBuyer () {
 			<div className="ProductDescription">
 				<Container>
 					<Form>
+					<Form.Group as={Row} className="mb-3" controlId="formPlaintextItemName">
+							<Form.Label column sm="3"> SellerPage </Form.Label>
+							<Col sm="">
+								<Form.Control plaintext readOnly defaultValue={location.state.auction.auctionName} />
+							</Col>
+						</Form.Group>
 						<Form.Group as={Row} className="mb-3" controlId="formPlaintextItemName">
 							<Form.Label column sm="3"> Item Name </Form.Label>
 							<Col sm="">
