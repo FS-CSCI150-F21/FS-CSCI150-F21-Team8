@@ -7,6 +7,7 @@ import Card from 'react-bootstrap/Card';
 import { Nav, NavLink, Bars, NavMenu, NavBtn, NavBtnLink } from '../components/Navbar/NavbarElements'
 import styled from 'styled-components';
 import { Grid, Typography } from '@mui/material';
+import { Button } from 'bootstrap';
 
 
 
@@ -42,24 +43,21 @@ class Home extends React.Component {
 
         return posts.map((post, index) => (
             <Grid key={index} xs={12} sm={6} md={4} lg={3}>
-
-                            <Card>
-                                <Card.Img variant="top" src={post.auctionImages}/>
-                                <Card.Body>
+                <div className="cardwrapper">
+                            <Card className="cardClass">
+                                <Card.Img className="card-image" variant="top" src={post.auctionImages}/>
+                                <Card.Body className="card-body">
                                     <Card.Title>{post.auctionName}</Card.Title>
-                                    <Typography variant="body2" color="textSecondar">
+                                    <Typography className="card-description" variant="body2" color="textSecondary">
                                         {post.auctionDescription}
-                                        <NavLink to={{
-                                            pathname: '/auctionpagebuyer',
-                                            state: {auction: post}
-                                        }}>
-                                            Place Bid
+                                        <NavLink to={{ pathname: '/auctionpagebuyer', state: {auction: post}}}>
+                                            <button className="card-btn" variant="primary"> View Auction</button>
                                         </NavLink>
 
                                     </Typography>
                                 </Card.Body>
                             </Card>
-    
+                </div>
             </Grid>)
         );
     };
@@ -69,7 +67,7 @@ class Home extends React.Component {
         return (
             <div className="homeBody">
                 <h1>Home</h1>
-                <Grid container justify="center" spacing={4}>
+                <Grid className="gridDisplay" container justify="center" spacing={4}>
                     {this.display(this.state.posts)}
                 </Grid>
             </div>

@@ -56,15 +56,63 @@ export default function AuctionPageBuyer () {
 
 	const loggedinuser = JSON.parse(localStorage.getItem('user')) //retrieve info of currently logged in user
 
+	//if noones logged in, only display the auction details, time left, and price. No postbid option
+	if (loggedinuser === null){
+		return (
+			<div className="Body">
+				<div className="itempicture">
+					<img src={location.state.auction.auctionImages} class="img2"></img> 
+				</div>
+	
+				<div className="ProductDescription">
+					<Container>
+						<Form>
+							<Form.Group as={Row} className="mb-3" controlId="formPlaintextItemName">
+								<Form.Label column sm="3"> Item Name </Form.Label>
+								<Col sm="">
+									<Form.Control plaintext readOnly defaultValue={location.state.auction.auctionName} />
+								</Col>
+							</Form.Group>
+	
+							<Form.Group as={Row} className="mb-3" controlId="formPlaintextDescription">
+								<Form.Label column sm="3"> Item Description </Form.Label>
+								<Col sm="">
+									<Form.Control plaintext readOnly defaultValue={location.state.auction.auctionDescription} />
+								</Col>
+							</Form.Group>
+	
+							<Form.Group as={Row} className="mb-3" controlId="formPlaintextAuthor">
+								<Form.Label column sm="3"> Author Name </Form.Label>
+								<Col sm="">
+									<Form.Control plaintext readOnly defaultValue={user.displayName} />
+								</Col>
+								<Col sm="">
+									<Box sx={{ width: 200, display: 'flex', alighnItems: 'center',}}>
+										<Rating name="read-rating" value = {user.rating} readOnly precision={0.5}/>
+										<Box sx={{ml: 2}}> {labels[user.rating]} </Box>
+									</Box>
+								</Col>
+							</Form.Group>
+	
+						</Form>
+					</Container>
+				</div> 
+			</div> //end Body 
+	
+		  ) //end return
+	}
+
+
+	//if logg in user is the author, go to seller's page
 	if (loggedinuser._id === location.state.auction.author) {
         console.log ("this is a seller's item")//verify the logged in user is the seller of they
 		return <Redirect to={{
 			pathname: '/auctionpageseller',
 			state: {auction: location.state.auction}
 		}}/>
-    } //if logged in user is the author, go to seller's display page
-  	
-	//else return the buyer's page
+    } 
+	
+	//else, the logged in user is a buyer, return the buyer's page
 	return (
     	<div className="Body">
         	<div className="itempicture">

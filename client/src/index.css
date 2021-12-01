@@ -12,14 +12,40 @@ code {
     monospace;
 }
 
-
 html{
 	height: 100%;
 }
-body{
-	margin: 0;
+
+
+/*stylings for  home page */
+.cardClass{
+	max-width:100%;
 	height: 100%;
-	width: 100%
+}
+.card-image{
+	width: 100%;
+	height: 100%;
+	object-fit:scale-down;
+	background-color: rgb(106, 115, 231);
+}
+
+.cardwrapper{
+	height: 100%;
+	margin-left: 20%;
+	margin-right: 10%;
+	margin-top:30px;
+}
+
+.card-body{
+	height: auto;
+}
+.card-description{
+	overflow: hidden;
+}
+
+.homeBody {
+	height: auto;
+	background-color: #babec2;
 }
 
 /* stylings for auctionpageseller/buyer*/
@@ -37,12 +63,11 @@ body{
 	display: flex;
 	flex-direction: row;
 	justify-content: space-around;
+	height:auto;
     background-color: #babec2;
 }
 
-.homeBody {
-	background-color: #babec2;
-}
+
 
 
 .ProductDescription {
