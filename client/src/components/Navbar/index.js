@@ -20,12 +20,13 @@ const Navbar = () => {
 
                 <NavMenu>
                  <NavLink to="/about" activeStyle >Help</NavLink>
-                </NavMenu>
+                </NavMenu>z
 
                 <NavBtn>
                     {!authState && <NavBtnLink to="/signup">SignUp</NavBtnLink>}
                     <NavBtnLink to="/login">{!authState ? "Sign In" : "Log Out"}</NavBtnLink>
                     {authState && <NavBtnLink to="/createAuction">Create Auction</NavBtnLink>}
+                    {authState && <NavBtnLink to="/profile">Profile</NavBtnLink>}
                 </NavBtn>
 
                 </Nav>
