@@ -35,23 +35,27 @@ const auctionSchema = mongoose.Schema({
         default: null,
         required: true,
     },
-    highestBidder: {
-        type: Object,
-        of: {
-            userBidding: {
-                type: mongoose.Schema.ObjectId,
-                default: null,
-                required: true,
-            },
-            bidAmount: {
-                type: Number,
-                default: 0,
-                required: true,
-            },
-            default: {}
-        },
+    // highestBidder: {
+    //     type: Object,
+    //     of: {
+    //         userBidding: {
+    //             type: mongoose.Schema.ObjectId,
+    //             default: null,
+    //             required: true,
+    //         },
+    //         bidAmount: {
+    //             type: Number,
+    //             default: 0,
+    //             required: true,
+    //         },
+    //         default: {}
+    //     },
+    //     default: {
+    //         userBidding: '',
+    //         bidAmount: 0
+    //     }
         
-    },
+    // },
     biddingHistory: {
         type: Array,
         of: {
