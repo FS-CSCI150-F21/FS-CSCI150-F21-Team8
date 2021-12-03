@@ -20,14 +20,31 @@ export default class ProfilePage extends React.Component {
 		};
 	}
 
+	// componentDidMount() {
+	// 	let user = JSON.parse(localStorage.getItem('user'))
+	// 	console.log(user._id)
+	// 	// setLoading(true);
+	// 	// setIsError(false);
+	// 	// const data = {
+	// 		this.setState({
+	// 	  displayName: user.data[0].displayName,
+	// 	  password: user._id.data[0].password,
+	// 	  email: user._id.data[0].email,
+	// 	  phoneNumber: user._id.data[0].phoneNumber,
+	// 	  description: user._id.data[0].description,
+	// 	  rating: user._id.data[0].rating,
+	// 	  profilePicture: user._id.data[0].profilePicture
+	// 		});
+	// 	}
+	
 	componentDidMount() {
 			let user = JSON.parse(localStorage.getItem('user'))
-
+			// console.log(user._id)
 			// axios.get('http://localhost:5000/user/get?email=test7@gmail.com')
-			axios.get('https://bdh-server.herokuapp.com/user/get?{user._id}')
+			axios.get('https://bdh-server.herokuapp.com/user/get?{user}')
 				.then((response) => {
 					console.log(response.data);
-					console.log(user._id)
+					console.log(user._id);
 					this.setState({
 						displayName: response.data[0].displayName,
 						email: response.data[0].email,
@@ -61,7 +78,7 @@ export default class ProfilePage extends React.Component {
 					User Name
 					</Form.Label>
 					<Col sm="10">
-					<Form.Control plaintext readOnly defaultValue={this.state.displayName} />
+					<Form.Control plaintext readOnly value={this.state.displayName} />
 					</Col>
 				</Form.Group>
 
@@ -70,7 +87,7 @@ export default class ProfilePage extends React.Component {
 					Email
 					</Form.Label>
 					<Col sm="10">
-					<Form.Control plaintext readOnly defaultValue={this.state.email} />
+					<Form.Control plaintext readOnly value={this.state.email} />
 					</Col>
 				</Form.Group>
 
@@ -80,7 +97,10 @@ export default class ProfilePage extends React.Component {
 					</Form.Label>
 					<Col sm="10">
 					{/* <Form.Control type="password" placeholder={this.state.description} /> */}
-					<Button variant="primary">Change your Password</Button>{' '}
+					<Link to="/EditProfile"><button>
+					Change your password
+					</button>
+					</Link>
 					</Col>
 				</Form.Group>
 
