@@ -8,8 +8,7 @@ import { useLocation } from "react-router";
 import Rating from '@mui/material/Rating';
 import Box from '@mui/material/Box';
 import axios from "axios";
-import { FaTags } from 'react-icons/fa';
-import { Table } from '@mui/material';
+
 
 
 const labels = {
@@ -52,10 +51,56 @@ export default function AuctionPageBuyer () {
 		getUserInfo();
 	}, []);
   
-
-	/**********************Redirect Auction Page Logic **********************/
+	/**********************Post Bid Logic  ***********************************/
 
 	const loggedinuser = JSON.parse(localStorage.getItem('user')) //retrieve info of currently logged in user
+
+	let put_params = {
+		bid:{
+			userBidding: "",
+			bidAmount: 0,
+		}
+	};
+
+	const validateInputs = (put_params) => {
+		if (put_params.bid.bidAmount === '' 
+		|| put_params.bid.bidAmount === '0'
+		|| put_params.bid.bidAmount <= location.state.auction.startingBid
+		|| location.state.auction.biddingHistory[0] === null
+		|| (isNaN(put_params.bid.bidAmount))
+		) {
+			return true
+		} else {
+			return false
+		}
+	}
+	const [valid, setValid] = useState(0);
+	
+
+	const placeBid= (event) => {
+		event.preventDefault();
+		if (validateInputs(put_params)){
+			console.log("Bid is not high enough")		//verify if bid amount is acceptable
+			//console.log(location.state.auction.biddingHistory[location.state.auction.biddingHistory.length -1])
+			setValid(1)
+			if(isNaN(put_params.bid.bidAmount)){
+				setValid(2)
+			}
+		}
+		else{
+			console.log("input number is high enough") //bid amount is acceptable
+			console.log(put_params.bid)
+			setValid(0)
+			axios.put(`https://bdh-server.herokuapp.com/auction/update?id=${location.state.auction._id}`, put_params).then((response)=>{
+                        console.log(response.data.message)
+						console.log(location.state.auction)
+						console.log(put_params)
+                    })
+		}
+
+	};
+
+	/**********************Redirect Auction Page Logic **********************/
 
 	//if noones logged in, only display the auction details, time left, and price. No postbid option
 	if (loggedinuser === null){
@@ -130,7 +175,7 @@ export default function AuctionPageBuyer () {
             </div>
 
 			<div className="ProductDescription">
-				<Container>
+				<Container className="ProductDescriptionContent">
 					<Form>
 						<Form.Group as={Row} className="auctionRows" controlId="formPlaintextItemName">
 							<Form.Label column sm="3"> Item Name </Form.Label>
@@ -159,6 +204,33 @@ export default function AuctionPageBuyer () {
 							</Col>
 						</Form.Group>
 					</Form>
+					<div className ="bidBody">
+					<div className = "auctionTimer">
+						input my timer here
+					</div>
+					<div className="PostBids">
+						<Form onSubmit={placeBid}>
+							<div>
+								<input  
+								type="text"
+								placeholder = "Bid Amount in Dollars"
+								name="Bids"
+							
+								onChange={(event)=>{
+									put_params.bid.userBidding = loggedinuser._id
+									put_params.bid.bidAmount = event.target.value
+								}}
+								/>
+							</div>
+							<div>
+                   				<input type='submit'></input>
+							</div>
+						</Form>
+						{valid === 1 && <div>Bid Amount is Too Low</div>}
+            			{valid === 2 && <div>Bid must be a number.</div>}
+					</div>
+					</div>
+						
 				</Container>
 
 			</div> 

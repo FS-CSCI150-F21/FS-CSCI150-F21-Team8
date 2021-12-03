@@ -43,6 +43,7 @@ export default function Create() {
                 setValid(2)
             }
         } else {
+            setValid(0)
             const put_params = {
                 currentAuctions: ''
             }

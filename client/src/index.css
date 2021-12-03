@@ -77,12 +77,15 @@ html{
 	border-radius: 25px;
 }
 
-.bid-and-timer-wrapper{
+.bidBody{
 	display: flex;
 	flex-direction: row;
 	justify-content:space-between;
 	height:auto;
+	margin-top: 20%;
 }
+
+
 
 button {
 	background-color: #13284C;
