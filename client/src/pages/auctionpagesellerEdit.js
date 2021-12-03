@@ -7,6 +7,7 @@ import { useLocation } from "react-router";
 import Rating from '@mui/material/Rating';
 import Box from '@mui/material/Box';
 import axios from "axios";
+import { Redirect } from 'react-router';
 
 //this page is where the seller is redirected to if they want to edit the auction
 
@@ -57,16 +58,24 @@ export default function AuctionPageSellerEdit () {
         auctionImages: location.state.auction.auctionImages
 	});
     
-
+	
     const editAuction= (event) => {
-		event.preventDefault();
+		event.preventDefault()
         const iform = new FormData();
         iform.append("file", auction.auctionImages)
         iform.append("upload_preset", "auction")
-        axios.put(`https://bdh-server.herokuapp.com/auction/update?id=${location.state.auction._id}`, auction).then((response)=>{
-            console.log(response.data.message)
-            console.log(auction.auctionImages)
-            })
+		let url = ''
+		axios.post("https://api.cloudinary.com/v1_1/bdh-images/image/upload", iform).then((res)=>{
+			url = res.data.url
+			setAuction({...auction, auctionImages: url})
+			auction.auctionImages = url
+			console.log("below is current auction images")
+			console.log(auction.auctionImages)
+			axios.put(`https://bdh-server.herokuapp.com/auction/update?id=${location.state.auction._id}`, auction).then((response)=>{
+				console.log(response.data.message)
+				console.log(location.state.auction.auctionImages)
+				})
+		})
     }
 
 	return (
@@ -84,7 +93,7 @@ export default function AuctionPageSellerEdit () {
                                     <textarea type="text" rows="1" cols="60"
                                         placeholder={location.state.auction.auctionName} value={auction.auctionName}
                                         onChange={(event) =>{
-                                            setAuction({...auction, auctionname: event.target.value})
+                                            setAuction({...auction, auctionName: event.target.value})
                                         }} />
 								</Col>
 							</Form.Group>
@@ -129,6 +138,7 @@ export default function AuctionPageSellerEdit () {
 								</Col>
 							</Form.Group>
                             <input type='submit'></input>
+		
 						</Form>
 
 						<div className = "bidBody">

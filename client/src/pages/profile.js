@@ -26,7 +26,6 @@ export default class ProfilePage extends React.Component {
 			axios.get('https://bdh-server.herokuapp.com/user/get?{user._id}')
 				.then((response) => {
 					console.log(response.data);
-					console.log(user._id)
 					this.setState({
 						displayName: response.data[0].displayName,
 						email: response.data[0].email,
@@ -60,7 +59,7 @@ export default class ProfilePage extends React.Component {
 					User Name
 					</Form.Label>
 					<Col sm="10">
-					<Form.Control plaintext readOnly defaultValue={this.state.displayName} />
+					<Form.Control plaintext readOnly Value={this.state.displayName} />
 					</Col>
 				</Form.Group>
 
