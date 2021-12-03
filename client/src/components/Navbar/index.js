@@ -24,7 +24,9 @@ const Navbar = () => {
 
                 <NavBtn>
                     {!authState && <NavBtnLink to="/signup">SignUp</NavBtnLink>}
-                    <NavBtnLink to="/login">{!authState ? "Sign In" : "Log Out"}</NavBtnLink>
+                    <NavBtnLink to="/login"> 
+                        {!authState ? "Sign In" : "Log Out"}
+                    </NavBtnLink>
                     {authState && <NavBtnLink to="/createAuction">Create Auction</NavBtnLink>}
                     {authState && <NavBtnLink to="/profile">Profile</NavBtnLink>}
                 </NavBtn>

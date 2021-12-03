@@ -1,19 +1,20 @@
 import React from 'react'; //maybe remove
 import './App.css';
 import Navbar from './components/Navbar';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './pages';
 import About from './pages/about';
 import Signup from './pages/signup';
 import Signin from './pages/login';
-import Create from './pages/createAuction'
+import Create from './pages/createAuction';
 import AuctionPageBuyer from './pages/auctionpagebuyer';
 import AuctionPageSeller from './pages/auctionpageseller';
-import {useState} from 'react'
-import Forgot from './pages/forgot'
+import {useState} from 'react';
+import Forgot from './pages/forgot';
 import Verify from './pages/verify';
-import Profile from './pages/profile';
+import ProfilePage from './pages/profile';
 import EditProfile from './pages/EditProfile';
+
 export const AuthContext = React.createContext()
 
 function App() {
@@ -34,7 +35,7 @@ function App() {
               <Route path="/createAuction" component={Create} />
               <Route path="/auctionpagebuyer" component={AuctionPageBuyer} />
               <Route path="/auctionpageseller" component={AuctionPageSeller} />
-              <Route path="/profile" component={Profile} />
+              <Route path="/profile" component={ProfilePage} />
               <Route path="/EditProfile" component={EditProfile} />
            </Switch>
            </AuthContext.Provider>

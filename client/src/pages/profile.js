@@ -1,9 +1,10 @@
-import React, {Link}  from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { Button, Container, Form, Image, Row, Col } from 'react-bootstrap';
 
 
-export default class Profile extends React.Component {
+export default class ProfilePage extends React.Component {
 	constructor(props) {
 		super(props);
 
