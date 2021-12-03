@@ -118,4 +118,42 @@ input {
 	padding: 7px 0px;
 }
 
+/*stylings for profile page */
+.img3 {
+	width: 200px;
+	height: 200px;
+	border: 5px solid #13284C;
+	background-color: whitesmoke;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	border-radius: 25px;
+}
+
+/* .mb-3 {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	height:auto;
+	background-color: #babec2;
+} */
+
+.row.mb-3 {
+	float:right;
+	right: 500px;
+	width: 650px;
+	height: 50px;
+	border: 5px solid #13284C;
+	background-color:whitesmoke;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	border-radius: 25px;
+}
+
+.button1 {
+	background-color: #13284C;
+	color: white;
+	border-radius: 25px;
+	padding: 5px 55px;
+	width: 500px;
+}
 /*stylings for ... */

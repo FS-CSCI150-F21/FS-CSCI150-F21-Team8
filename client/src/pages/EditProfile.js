@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import axios from 'axios';
 import { Button, Container, Form, Image, Row, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -89,7 +90,15 @@ function EditProfile() {
 			<Container>
 				<Row>
 				<Col xs={6} md={4}>
-				<a href=""><img src="https://st2.depositphotos.com/1104517/11967/v/950/depositphotos_119675554-stock-illustration-male-avatar-profile-picture-vector.jpg" class="img2"></img></a>
+				<input  
+                    type="file"
+                    accept=".png, .jpg, .jpeg"
+                    name="ProfilePicture"
+                    multiple = {false}
+
+                    onChange={e => setProfilePicture(e.target.value)} />
+                />
+				<a href=""><img src="https://st2.depositphotos.com/1104517/11967/v/950/depositphotos_119675554-stock-illustration-male-avatar-profile-picture-vector.jpg" class="img3"></img></a>
 				</Col>
 
 				<Col>

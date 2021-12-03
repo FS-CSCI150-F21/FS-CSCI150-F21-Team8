@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Link}  from 'react';
 import axios from 'axios';
 import { Button, Container, Form, Image, Row, Col } from 'react-bootstrap';
 
@@ -99,24 +99,31 @@ export default class Profile extends React.Component {
 				</Form.Group>
 
 				<Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
-					<Form.Label column sm="2">
+					<Form.Label column sm="5">
 					Phone Number
 					</Form.Label>
 					<Col sm="10">
 					<Form.Control plaintext readOnly defaultValue={this.state.phoneNumber} />
 					</Col>
 				</Form.Group>
-				<Button variant="primary">Edit your Profile</Button>{' '}
+
+				{/* <Button variant="primary" className="buttonE" >Edit your Profile</Button>{' '} */}
 				</Form>
 				</Col>
+				<Link to="/EditProfile"><button>
+              	Edit your profile
+            	</button>
+				</Link>
+
+				{/* <Button variant="primary" className="button1" >Edit your Profile</Button>{' '} */}
 				{/* <Button variant="primary">Edit your Profile</Button>{' '} */}
 				</Row>
 
-				<Row>
+				{/* <Row>
 				<Col>
 				<Button variant="primary">Change Profile Picture</Button>{' '}
 				</Col>
-				</Row>
+				</Row> */}
 
 			</Container>
 		);
