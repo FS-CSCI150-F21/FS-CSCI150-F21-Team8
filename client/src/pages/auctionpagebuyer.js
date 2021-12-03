@@ -68,21 +68,21 @@ export default function AuctionPageBuyer () {
 				<div className="ProductDescription">
 					<Container>
 						<Form classname="auctionDetails">
-							<Form.Group as={Row} className="mb-3" controlId="formPlaintextItemName">
+							<Form.Group as={Row} className="auctionRows" controlId="formPlaintextItemName">
 								<Form.Label column sm="3"> Item Name </Form.Label>
 								<Col sm="">
 									<Form.Control plaintext readOnly defaultValue={location.state.auction.auctionName} />
 								</Col>
 							</Form.Group>
 	
-							<Form.Group as={Row} className="mb-3" controlId="formPlaintextDescription">
+							<Form.Group as={Row} className="auctionRows" controlId="formPlaintextDescription">
 								<Form.Label column sm="3"> Item Description </Form.Label>
 								<Col sm="">
 								<Form.Control as="textarea" rows="5" plaintext readOnly defaultValue={location.state.auction.auctionDescription} />
 								</Col>
 							</Form.Group>
 	
-							<Form.Group as={Row} className="mb-3" controlId="formPlaintextAuthor">
+							<Form.Group as={Row} className="auctionRows" controlId="formPlaintextAuthor">
 								<Form.Label column sm="3"> Author Name </Form.Label>
 								<Col sm="">
 									<Form.Control plaintext readOnly defaultValue={user.displayName} />
@@ -132,21 +132,21 @@ export default function AuctionPageBuyer () {
 			<div className="ProductDescription">
 				<Container>
 					<Form>
-						<Form.Group as={Row} className="mb-3" controlId="formPlaintextItemName">
+						<Form.Group as={Row} className="auctionRows" controlId="formPlaintextItemName">
 							<Form.Label column sm="3"> Item Name </Form.Label>
 							<Col sm="">
 								<Form.Control plaintext readOnly defaultValue={location.state.auction.auctionName} />
 							</Col>
 						</Form.Group>
 
-						<Form.Group as={Row} className="mb-3" controlId="formPlaintextDescription">
+						<Form.Group as={Row} className="auctionRows" controlId="formPlaintextDescription">
 							<Form.Label column sm="3"> Item Description </Form.Label>
 							<Col sm="" >
 								<Form.Control as="textarea" rows="5" plaintext readOnly defaultValue={location.state.auction.auctionDescription} />
 							</Col>
 						</Form.Group>
 
-						<Form.Group as={Row} className="mb-3" controlId="formPlaintextAuthor">
+						<Form.Group as={Row} className="auctionRows" controlId="formPlaintextAuthor">
 							<Form.Label column sm="3"> Author Name </Form.Label>
 							<Col sm="">
 								<Form.Control plaintext readOnly defaultValue={user.displayName} />
