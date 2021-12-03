@@ -22,11 +22,12 @@ export default class ProfilePage extends React.Component {
 
 	componentDidMount() {
 			let user = JSON.parse(localStorage.getItem('user'))
+
 			// axios.get('http://localhost:5000/user/get?email=test7@gmail.com')
-			axios.get('https://bdh-server.herokuapp.com/user/get?id=${user._id}')
+			axios.get('https://bdh-server.herokuapp.com/user/get?{user._id}')
 				.then((response) => {
 					console.log(response.data);
-					
+					console.log(user._id)
 					this.setState({
 						displayName: response.data[0].displayName,
 						email: response.data[0].email,

@@ -36,7 +36,7 @@ function App() {
               <Route path="/createAuction" component={Create} />
               <Route path="/auctionpagebuyer" component={AuctionPageBuyer} />
               <Route path="/auctionpageseller" component={AuctionPageSeller} />
-              <Route path="auctionpagesellerEdit" component={AuctionPageSellerEdit} />
+              <Route path="/auctionpagesellerEdit" component={AuctionPageSellerEdit} />
               <Route path="/profile" component={ProfilePage} />
               <Route path="/EditProfile" component={EditProfile} />
            </Switch>
