@@ -226,7 +226,10 @@ export const updateUser = async (req, res) => {
             user.profilePicture = req.body.profilePicture
         }
         if (req.body.description) {
-            user.description = req.body.descriptiond
+            user.description = req.body.description
+        }
+        if (req.body.phoneNumber) {
+            user.phoneNumber = req.body.phoneNumber
         }
         await user.save()
         res.status(200).json({message: "Success"})
