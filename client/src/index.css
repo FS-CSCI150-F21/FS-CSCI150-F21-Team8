@@ -85,12 +85,10 @@ html{
 	margin-top: 20%;
 }
 
-
-
 button {
 	background-color: #13284C;
 	color: white;
-	border-radius: 25px;
+	border-radius: 50px;
 	padding: 5px 55px;
 }
 a{
@@ -148,4 +146,15 @@ input {
 	padding: 5px 55px;
 	width: 500px;
 }
-/*stylings for ... */
+/*stylings for login/logout page */
+
+.LogoutBody{
+	display:flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
+	margin-top: 10%;
+}
+.Logouttext{
+	font-size: larger;
+}

@@ -53,9 +53,16 @@ const Signin = () => {
 	if (user){
 		//window.location = '/';
 		return (
-			<div>
-			{user.email} is logged in
-			<button onClick = {handleLogout}>logout</button>
+			<div className='LogoutBody'>
+				<div className = "LogoutPic">
+					{user.profilePicture}
+				</div>
+				<div className="Logouttext">
+					{user.displayName} is logged in
+				</div>
+				<div className="LogoutButton">
+					<button onClick = {handleLogout}>logout</button>
+				</div>
 			</div>
 		);
 	}

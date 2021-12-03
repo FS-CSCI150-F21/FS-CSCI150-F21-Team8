@@ -88,16 +88,29 @@ export default function AuctionPageBuyer () {
 			}
 		}
 		else{
-			console.log("input number is high enough") //bid amount is acceptable
-			console.log(put_params.bid)
-			setValid(0)
-			axios.put(`https://bdh-server.herokuapp.com/auction/update?id=${location.state.auction._id}`, put_params).then((response)=>{
-                        console.log(response.data.message)
-						console.log(location.state.auction)
-						console.log(put_params)
+			if(location.state.auction.biddingHistory[0] == null){
+				if(put_params.bid.bidAmount > location.state.auction.startingBid){
+					console.log("input number is high enough") //bid amount is acceptable
+				setValid(0)
+				axios.put(`https://bdh-server.herokuapp.com/auction/update?id=${location.state.auction._id}`, put_params).then((response)=>{
+                    console.log(response.data.message)
                     })
+				console.log(location.state.auction)
+				}
+				
+			}
+			else{
+				if (put_params.bid.bidAmount <= location.state.auction.biddingHistory[location.state.auction.biddingHistory.length -1].bidAmount) {
+				setValid(1)
+				}
+				console.log("input number is high enough") //bid amount is acceptable
+				setValid(0)
+				axios.put(`https://bdh-server.herokuapp.com/auction/update?id=${location.state.auction._id}`, put_params).then((response)=>{
+                    console.log(response.data.message)
+                    })
+				console.log(location.state.auction)
+			}
 		}
-
 	};
 
 	/**********************Redirect Auction Page Logic **********************/
@@ -146,8 +159,8 @@ export default function AuctionPageBuyer () {
 							enter some sort of highest bid
 							</div>
 
-							<div classname="postBid">
-							post bid button
+							<div classname="placeholder">
+								
 							</div>
 						</div>
 					</Container>
