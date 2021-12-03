@@ -17,6 +17,8 @@ function EditProfile() {
 	const [isError, setIsError] = useState(false);
 	const [data, setData] = useState(null);
 
+	const user = JSON.parse(localStorage.getItem('user'))
+	console.log(user._id)
 	const handleSubmit = () => {
 		setLoading(true);
 		setIsError(false);
@@ -30,7 +32,7 @@ function EditProfile() {
 		  profilePicture: profilePicture
 		  
 		}
-		axios.put('https://bdh-server.herokuapp.com/user/update?email=test1@gmail.com', data).then(res => {
+		axios.put('https://bdh-server.herokuapp.com/user/update?id=${user._id}', data).then(res => {
 		  setData(res.data);
 		  setDisplayName('');
 		  setEmail('');
