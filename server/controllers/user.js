@@ -210,7 +210,7 @@ export const updateUser = async (req, res) => {
         if (req.body.currentAuctions){
             user.currentAuctions.push(req.body.currentAuctions)
         }
-        if (req.body.currentBids) {
+        if (req.body.bid) {
             user.currentBids.push(req.body.currentBids)
         }
         if (req.body.displayName){
@@ -224,6 +224,12 @@ export const updateUser = async (req, res) => {
         }
         if (req.body.profilePicture) {
             user.profilePicture = req.body.profilePicture
+        }
+        if (req.body.description) {
+            user.description = req.body.description
+        }
+        if (req.body.phoneNumber) {
+            user.phoneNumber = req.body.phoneNumber
         }
         await user.save()
         res.status(200).json({message: "Success"})

@@ -103,6 +103,12 @@ export const updateAuction = async (req, res) => {
                     throw new Error('The same user cannot bid twice in a row')
                 }
             }
+            if (auction.startingBid > req.body.bid.bidAmount) {
+                throw new Error('Bid amount must be greater than starting bid.')
+            }
+            if (auction.author === req.body.userBidding) {
+                throw new Error('Cannot bid on your own auction.')
+            }
             auction.biddingHistory.push(req.body.bid)
         }
         if (req.body.auctionName){
