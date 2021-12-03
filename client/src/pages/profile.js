@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Button, Container, Form, Image, Row, Col } from 'react-bootstrap';
 
 
+
 export default class ProfilePage extends React.Component {
 	constructor(props) {
 		super(props);

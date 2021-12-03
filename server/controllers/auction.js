@@ -117,6 +117,9 @@ export const updateAuction = async (req, res) => {
         if (req.body.author){
             auction.author = req.body.author
         }
+        if (req.body.auctionImages) {
+            auction.auctionImages = req.body.auctionImages
+        }
         await auction.save()
         res.status(200).json({message: "Success"})
     } catch (error) {
