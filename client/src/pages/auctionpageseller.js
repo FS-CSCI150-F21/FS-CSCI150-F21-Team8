@@ -1,6 +1,4 @@
 import React, {useState,useEffect} from 'react';
-import { Redirect } from 'react-router';
-import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
@@ -9,8 +7,8 @@ import { useLocation } from "react-router";
 import Rating from '@mui/material/Rating';
 import Box from '@mui/material/Box';
 import axios from "axios";
-
-//this page is where the seller is redirected to if they want to edit the auction
+import { NavLink } from '../components/Navbar/NavbarElements';
+//this page is where the seller is redirected to to view their auction
 
 const labels = {
 	1: 'Horrendous',
@@ -27,7 +25,7 @@ const labels = {
 export default function AuctionPageSeller () {
 
 	let location = useLocation();
-  	console.log(location);  //testing if post from home page passed properly
+  	console.log(location.state);  //testing if post from home page passed properly
 
 	const [user, setUser] = useState({
 		_id: '',
@@ -88,8 +86,20 @@ export default function AuctionPageSeller () {
 									</Box>
 								</Col>
 							</Form.Group>
-	
 						</Form>
+
+						<div className = "bidBody">
+							<div>
+								
+							</div>
+
+							<div className = "editAuctionOption">
+								<NavLink to={{ pathname: '/auctionpagesellerEdit', state: {auction: location.state.auction}}}>
+                                    <button className="card-btn" variant="primary"> Edit Auction</button>
+                                </NavLink>
+							</div>
+						</div>
+
 					</Container>
 				</div>
 			</div>

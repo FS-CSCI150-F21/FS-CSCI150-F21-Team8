@@ -154,12 +154,12 @@ export default function AuctionPageBuyer () {
 							</Form.Group>
 						</Form>
 
-						<div classname="bid-and-timer-wrapper">
+						<div className="bidBody">
 							<div classname="auctionTimer">
-							enter some sort of highest bid
+								enter some sort of highest bid
 							</div>
 
-							<div classname="placeholder">
+							<div classname="PostBids">
 								
 							</div>
 						</div>
@@ -217,35 +217,34 @@ export default function AuctionPageBuyer () {
 							</Col>
 						</Form.Group>
 					</Form>
-					<div className ="bidBody">
-					<div className = "auctionTimer">
-						input my timer here
-					</div>
-					<div className="PostBids">
-						<Form onSubmit={placeBid}>
-							<div>
-								<input  
-								type="text"
-								placeholder = "Bid Amount in Dollars"
-								name="Bids"
-							
-								onChange={(event)=>{
-									put_params.bid.userBidding = loggedinuser._id
-									put_params.bid.bidAmount = event.target.value
-								}}
-								/>
-							</div>
-							<div>
-                   				<input type='submit'></input>
-							</div>
-						</Form>
-						{valid === 1 && <div>Bid Amount is Too Low</div>}
-            			{valid === 2 && <div>Bid must be a number.</div>}
-					</div>
-					</div>
-						
-				</Container>
 
+					<div className ="bidBody">
+						<div className = "auctionTimer">
+							input my timer here
+						</div>
+						<div className="PostBids">
+							<Form onSubmit={placeBid}>
+								<div>
+									<input  
+									type="text"
+									placeholder = "Bid Amount"
+									name="Bids"
+							
+									onChange={(event)=>{
+										put_params.bid.userBidding = loggedinuser._id
+										put_params.bid.bidAmount = event.target.value
+									}}
+									/>
+								</div>
+								<div>
+                   					<input type='submit'></input>
+								</div>
+							</Form>
+							{valid === 1 && <div>Bid Amount is Too Low</div>}
+            				{valid === 2 && <div>Bid must be a number.</div>}
+						</div>
+					</div>	
+				</Container>
 			</div> 
 		</div> //end Body 
 

@@ -9,6 +9,7 @@ import Signin from './pages/login';
 import Create from './pages/createAuction';
 import AuctionPageBuyer from './pages/auctionpagebuyer';
 import AuctionPageSeller from './pages/auctionpageseller';
+import AuctionPageSellerEdit from './pages/auctionpagesellerEdit';
 import {useState} from 'react';
 import Forgot from './pages/forgot';
 import Verify from './pages/verify';
@@ -35,6 +36,7 @@ function App() {
               <Route path="/createAuction" component={Create} />
               <Route path="/auctionpagebuyer" component={AuctionPageBuyer} />
               <Route path="/auctionpageseller" component={AuctionPageSeller} />
+              <Route path="auctionpagesellerEdit" component={AuctionPageSellerEdit} />
               <Route path="/profile" component={ProfilePage} />
               <Route path="/EditProfile" component={EditProfile} />
            </Switch>
