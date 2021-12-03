@@ -95,11 +95,13 @@ export const updateAuction = async (req, res) => {
         }
         if (req.body.bid) {
             console.log(req.body.bid)
-            if (req.body.bid.bidAmount <= auction.biddingHistory[auction.biddingHistory.length - 1].bidAmount) {
-                throw new Error('Bid amount must be greater than current bid.')
-            }
-            if (req.body.bid.userBidding === auction.biddingHistory[auction.biddingHistory.length - 1].userBidding) {
-                throw new Error('The same user cannot bid twice in a row')
+            if (auction.biddingHistory.length > 0) {
+                if (req.body.bid.bidAmount <= auction.biddingHistory[auction.biddingHistory.length - 1].bidAmount) {
+                    throw new Error('Bid amount must be greater than current bid.')
+                }
+                if (req.body.bid.userBidding === auction.biddingHistory[auction.biddingHistory.length - 1].userBidding) {
+                    throw new Error('The same user cannot bid twice in a row')
+                }
             }
             auction.biddingHistory.push(req.body.bid)
         }
