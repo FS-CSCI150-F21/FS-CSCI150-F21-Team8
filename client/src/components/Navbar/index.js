@@ -1,10 +1,8 @@
 import React from 'react'
-//import { NavLink } from 'react-router-dom'
-//import logo from './dog.jpg';
 import './img.css';
 import { Nav, NavLink, Bars, NavMenu, NavBtn, NavBtnLink } from './NavbarElements'
 import './img.css'
-import { useState, useEffect, useContext } from 'react';
+import { useContext } from 'react';
 import { AuthContext } from '../../App';
 
 const Navbar = () => {
@@ -13,14 +11,14 @@ const Navbar = () => {
         <>
             <Nav>
                 <NavLink to="/">
-                    <img src="https://res.cloudinary.com/bdh-images/image/upload/v1638056313/etc/dog_ige1lb.jpg" class="img1" alt="Home"></img>
+                    <img src="https://res.cloudinary.com/bdh-images/image/upload/v1638056313/etc/dog_ige1lb.jpg" className="img1" alt="Home"></img>
                 </NavLink>
                 <Bars />
 
 
                 <NavMenu>
                  <NavLink to="/about" activeStyle >Help</NavLink>
-                </NavMenu>z
+                </NavMenu>
 
                 <NavBtn>
                     {!authState && <NavBtnLink to="/signup">SignUp</NavBtnLink>}
