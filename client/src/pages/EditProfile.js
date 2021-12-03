@@ -90,6 +90,7 @@ function EditProfile() {
 			<Container>
 				<Row>
 				<Col xs={6} md={4}>
+				<a href=""><img src="https://st2.depositphotos.com/1104517/11967/v/950/depositphotos_119675554-stock-illustration-male-avatar-profile-picture-vector.jpg" class="img3"></img></a>
 				<input  
                     type="file"
                     accept=".png, .jpg, .jpeg"
@@ -97,8 +98,6 @@ function EditProfile() {
                     multiple = {false}
 
                     onChange={e => setProfilePicture(e.target.value)} />
-                />
-				<a href=""><img src="https://st2.depositphotos.com/1104517/11967/v/950/depositphotos_119675554-stock-illustration-male-avatar-profile-picture-vector.jpg" class="img3"></img></a>
 				</Col>
 
 				<Col>
@@ -188,10 +187,10 @@ function EditProfile() {
 					</Form.Group> */}
 
 				<Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
-					<Form.Label column sm="2">
+					<Form.Label column sm="3">
 					Phone Number
 					</Form.Label>
-					<Col sm="10">
+					<Col sm="9">
 					<input
 					type="text"
 					className="form-control"
@@ -203,10 +202,11 @@ function EditProfile() {
 					</Col>
 					</Form.Group>
 
-				<Button type="submit" onClick={handleSubmit} disabled={loading}>{loading ? 'Loading...' : 'Update'}</Button>
+				{/* <Button type="submit" onClick={handleSubmit} disabled={loading}>{loading ? 'Loading...' : 'Update'}</Button> */}
 
 				</Form>
 				</Col>
+				<Button type="submit" onClick={handleSubmit} disabled={loading}>{loading ? 'Loading...' : 'Update'}</Button>
 				{/* <Button variant="primary">Edit your Profile</Button>{' '} */}
 				</Row>
 

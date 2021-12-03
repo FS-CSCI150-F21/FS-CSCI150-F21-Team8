@@ -21,7 +21,7 @@ export default class ProfilePage extends React.Component {
 
 	componentDidMount() {
 			// axios.get('http://localhost:5000/user/get?email=test7@gmail.com')
-			axios.get('https://bdh-server.herokuapp.com/user/get?email=test7@gmail.com')
+			axios.get('https://bdh-server.herokuapp.com/user/get?email=test3@gmail.com')
 				.then((response) => {
 					console.log(response.data);
 					
@@ -48,7 +48,7 @@ export default class ProfilePage extends React.Component {
 			<Container>
 				<Row>
 				<Col xs={6} md={4}>
-				<a href=""><img src="https://st2.depositphotos.com/1104517/11967/v/950/depositphotos_119675554-stock-illustration-male-avatar-profile-picture-vector.jpg" class="img2"></img></a>
+				<a href=""><img src="this.state.profilePicture" class="img2"></img></a>
 				</Col>
 
 				<Col>
@@ -100,10 +100,10 @@ export default class ProfilePage extends React.Component {
 				</Form.Group>
 
 				<Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
-					<Form.Label column sm="5">
+					<Form.Label column sm="3">
 					Phone Number
 					</Form.Label>
-					<Col sm="10">
+					<Col sm="9">
 					<Form.Control plaintext readOnly defaultValue={this.state.phoneNumber} />
 					</Col>
 				</Form.Group>
