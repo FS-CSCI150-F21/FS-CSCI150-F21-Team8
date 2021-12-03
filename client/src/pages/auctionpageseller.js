@@ -62,12 +62,6 @@ export default function AuctionPageSeller () {
 				<div className="ProductDescription">
 					<Container>
 						<Form>
-						<Form.Group as={Row} className="mb-3" controlId="formPlaintextItemName">
-								<Form.Label column sm="3"> SellerPage </Form.Label>
-								<Col sm="">
-									<Form.Control plaintext readOnly defaultValue={location.state.auction.auctionName} />
-								</Col>
-							</Form.Group>
 							<Form.Group as={Row} className="mb-3" controlId="formPlaintextItemName">
 								<Form.Label column sm="3"> Item Name </Form.Label>
 								<Col sm="">
@@ -78,7 +72,7 @@ export default function AuctionPageSeller () {
 							<Form.Group as={Row} className="mb-3" controlId="formPlaintextDescription">
 								<Form.Label column sm="3"> Item Description </Form.Label>
 								<Col sm="">
-									<Form.Control plaintext readOnly defaultValue={location.state.auction.auctionDescription} />
+								<Form.Control as="textarea" rows="5" plaintext readOnly defaultValue={location.state.auction.auctionDescription} />
 								</Col>
 							</Form.Group>
 	

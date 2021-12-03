@@ -67,9 +67,6 @@ html{
     background-color: #babec2;
 }
 
-
-
-
 .ProductDescription {
 	width: 600px;
 	height: 600px;
@@ -80,19 +77,11 @@ html{
 	border-radius: 25px;
 }
 
-table {
-	width: 300px;
-	margin-top: 20px;
-	margin-left: 10px;
-	margin-right: 0px;
-	justify-content: center;
-	padding-top: 20px;
-
-}
-td {
-	padding: 10px;
-	text-align: center;
-	font-size: 25px;
+.bid-and-timer-wrapper{
+	display: flex;
+	flex-direction: row;
+	justify-content:space-between;
+	height:auto;
 }
 
 button {

@@ -9,6 +9,7 @@ import Rating from '@mui/material/Rating';
 import Box from '@mui/material/Box';
 import axios from "axios";
 import { FaTags } from 'react-icons/fa';
+import { Table } from '@mui/material';
 
 
 const labels = {
@@ -66,7 +67,7 @@ export default function AuctionPageBuyer () {
 	
 				<div className="ProductDescription">
 					<Container>
-						<Form>
+						<Form classname="auctionDetails">
 							<Form.Group as={Row} className="mb-3" controlId="formPlaintextItemName">
 								<Form.Label column sm="3"> Item Name </Form.Label>
 								<Col sm="">
@@ -77,7 +78,7 @@ export default function AuctionPageBuyer () {
 							<Form.Group as={Row} className="mb-3" controlId="formPlaintextDescription">
 								<Form.Label column sm="3"> Item Description </Form.Label>
 								<Col sm="">
-									<Form.Control plaintext readOnly defaultValue={location.state.auction.auctionDescription} />
+								<Form.Control as="textarea" rows="5" plaintext readOnly defaultValue={location.state.auction.auctionDescription} />
 								</Col>
 							</Form.Group>
 	
@@ -93,8 +94,17 @@ export default function AuctionPageBuyer () {
 									</Box>
 								</Col>
 							</Form.Group>
-	
 						</Form>
+
+						<div classname="bid-and-timer-wrapper">
+							<div classname="auctionTimer">
+							enter some sort of highest bid
+							</div>
+
+							<div classname="postBid">
+							post bid button
+							</div>
+						</div>
 					</Container>
 				</div> 
 			</div> //end Body 
@@ -131,8 +141,8 @@ export default function AuctionPageBuyer () {
 
 						<Form.Group as={Row} className="mb-3" controlId="formPlaintextDescription">
 							<Form.Label column sm="3"> Item Description </Form.Label>
-							<Col sm="">
-								<Form.Control plaintext readOnly defaultValue={location.state.auction.auctionDescription} />
+							<Col sm="" >
+								<Form.Control as="textarea" rows="5" plaintext readOnly defaultValue={location.state.auction.auctionDescription} />
 							</Col>
 						</Form.Group>
 
@@ -148,9 +158,9 @@ export default function AuctionPageBuyer () {
 								</Box>
 							</Col>
 						</Form.Group>
-
 					</Form>
 				</Container>
+
 			</div> 
 		</div> //end Body 
 
