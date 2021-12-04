@@ -20,23 +20,6 @@ export default class ProfilePage extends React.Component {
 		};
 	}
 
-	// componentDidMount() {
-	// 	let user = JSON.parse(localStorage.getItem('user'))
-	// 	console.log(user._id)
-	// 	// setLoading(true);
-	// 	// setIsError(false);
-	// 	// const data = {
-	// 		this.setState({
-	// 	  displayName: user.data[0].displayName,
-	// 	  password: user._id.data[0].password,
-	// 	  email: user._id.data[0].email,
-	// 	  phoneNumber: user._id.data[0].phoneNumber,
-	// 	  description: user._id.data[0].description,
-	// 	  rating: user._id.data[0].rating,
-	// 	  profilePicture: user._id.data[0].profilePicture
-	// 		});
-	// 	}
-	
 	
 	componentDidMount() {
 			let user = JSON.parse(localStorage.getItem('user'))
@@ -64,11 +47,11 @@ export default class ProfilePage extends React.Component {
 
 	render() {	
 		return (
-
+			
 			<Container>
 				<Row>
 				<Col xs={6} md={4}>
-				<a href=""><img src="this.state.profilePicture" class="img2"></img></a>
+				<img src={this.state.profilePicture} alt = {""} class="img2"></img>
 				</Col>
 
 				<Col>
@@ -96,7 +79,6 @@ export default class ProfilePage extends React.Component {
 					Password
 					</Form.Label>
 					<Col sm="10">
-					{/* <Form.Control type="password" placeholder={this.state.description} /> */}
 					<Link to="/EditProfile"><button>
 					Change your password
 					</button>

@@ -5,7 +5,6 @@ import { Button, Container, Form, Image, Row, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function EditProfile() {
-
 	const [displayName, setDisplayName] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
@@ -24,31 +23,49 @@ function EditProfile() {
 		console.log(user._id)
 		setLoading(true);
 		setIsError(false);
-		const data = {
-		  displayName: displayName,
-		  password: password,
-		  email: email,
-		  phoneNumber: phoneNumber,
-		  description: description,
-		  rating: rating,
-		  profilePicture: profilePicture
-		  
-		}
-		axios.put(`https://bdh-server.herokuapp.com/user/update?id=${user._id}`, data).then(res => {
-		  setData(res.data);
-		  setDisplayName('');
-		  setEmail('');
-		  setPassword('');
-		  setProfilePicture('');
-		  setRating('');
-		  setDescription('');
-		  setPhoneNumber('');
-		  setLoading(false);
-		}).catch(err => {
-		  setLoading(false);
-		  setIsError(true);
-		});
+		
+
+		const iform = new FormData();
+        iform.append("file", profilePicture)
+        iform.append("upload_preset", "auction")
+		// const post_body = user;
+		let url = ''
+		axios.post('https://api.cloudinary.com/v1_1/bdh-images/image/upload', iform).then(res=>{
+                console.log(res.data.url)
+                url = res.data.url
+
+				console.log("Profile Picture: " + profilePicture)
+
+				const data = {
+					displayName: displayName,
+					password: password,
+					email: email,
+					phoneNumber: phoneNumber,
+					description: description,
+					rating: rating,
+					profilePicture: res.data.url					
+				  } 
+				console.log(data)
+				axios.put(`https://bdh-server.herokuapp.com/user/update?id=${user._id}`, data).then(res => {
+					const userData = JSON.parse(res.config.data) 
+		
+				  setDisplayName(userData.displayName);
+				  setEmail(userData.email);
+				  setPassword(userData.password);
+				  setProfilePicture(userData.profilePicture);
+				  setRating(userData.rating);
+				  setDescription(userData.description);
+				  setPhoneNumber(userData.phoneNumber);
+				  setLoading(false);
+				})
+				.catch(err => {
+				  setLoading(false);
+				  setIsError(true);
+				})
+		})		
 	  }
+
+	
 
 // export default class Profile extends React.Component {
 // 	constructor(props) {
@@ -94,14 +111,14 @@ function EditProfile() {
 			<Container>
 				<Row>
 				<Col xs={6} md={4}>
-				<a href=""><img src="https://st2.depositphotos.com/1104517/11967/v/950/depositphotos_119675554-stock-illustration-male-avatar-profile-picture-vector.jpg" class="img3"></img></a>
+				<a href=""><img src={profilePicture} class="img3"></img></a>
 				<input  
                     type="file"
                     accept=".png, .jpg, .jpeg"
                     name="ProfilePicture"
                     multiple = {false}
 
-                    onChange={e => setProfilePicture(e.target.value)} />
+                    onChange={e => setProfilePicture(e.target.files[0])} />
 				</Col>
 
 				<Col>
