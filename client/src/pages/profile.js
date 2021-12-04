@@ -37,11 +37,12 @@ export default class ProfilePage extends React.Component {
 	// 		});
 	// 	}
 	
+	
 	componentDidMount() {
 			let user = JSON.parse(localStorage.getItem('user'))
-			// console.log(user._id)
+			console.log(user._id)
 			// axios.get('http://localhost:5000/user/get?email=test7@gmail.com')
-			axios.get('https://bdh-server.herokuapp.com/user/get?{user}')
+			axios.get(`https://bdh-server.herokuapp.com/user/get?id=${user._id}`)
 				.then((response) => {
 					console.log(response.data);
 					this.setState({
@@ -77,11 +78,7 @@ export default class ProfilePage extends React.Component {
 					User Name
 					</Form.Label>
 					<Col sm="10">
-<<<<<<< HEAD
 					<Form.Control plaintext readOnly value={this.state.displayName} />
-=======
-					<Form.Control plaintext readOnly Value={this.state.displayName} />
->>>>>>> 17d05873588ac74911be36f9bf7985d38040fbce
 					</Col>
 				</Form.Group>
 

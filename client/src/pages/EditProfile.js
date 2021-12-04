@@ -34,7 +34,7 @@ function EditProfile() {
 		  profilePicture: profilePicture
 		  
 		}
-		axios.put('https://bdh-server.herokuapp.com/user/update?id=${user}', data).then(res => {
+		axios.put(`https://bdh-server.herokuapp.com/user/update?id=${user._id}`, data).then(res => {
 		  setData(res.data);
 		  setDisplayName('');
 		  setEmail('');
