@@ -51,7 +51,7 @@ export default function AuctionPageSellerEdit () {
 		getUserInfo();
 	}, []);
     
-    /*************edit auction logid ****************/
+    /*************edit auction logic ****************/
      const [auction, setAuction] = useState({ 
 		auctionName: location.state.auction.auctionName,
         auctionDescription: location.state.auction.auctionDescription,
@@ -77,6 +77,16 @@ export default function AuctionPageSellerEdit () {
 				})
 		})
     }
+
+	/*****************Delete Auction Logic *****************************/
+	const handleDelete = () => {
+		console.log("attempting delete")
+		axios.delete(`https://bdh-server.herokuapp.com/auction/delete?id=${location.state.auction._id}`).then((response)=>{
+			console.log(response.data.message)
+			console.log(location.state.auction.auctionName)
+		})
+
+	}
 
 	return (
 			<div className="Body">
@@ -147,7 +157,7 @@ export default function AuctionPageSellerEdit () {
 							</div>
 
 							<div>
-                   				
+							<button type="submit" onClick={handleDelete} >Delete Auction</button>
 							</div>
 						</div>
 

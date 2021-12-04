@@ -63,7 +63,7 @@ html{
 	display: flex;
 	flex-direction: row;
 	justify-content: space-around;
-	height:auto;
+	height:700px;
     background-color: #babec2;
 }
 
@@ -109,6 +109,17 @@ input {
 }
 
 /*stylings for profile page */
+.profilebody{
+	background-color: #babec2;
+	height: 700px;
+}
+.pwbutton{
+	background-color: #13284C;
+	color: white;
+	border-radius: 50px;
+	margin-left: 10%;
+	margin-top: 3px;
+}
 .img3 {
 	width: 200px;
 	height: 200px;
@@ -119,24 +130,16 @@ input {
 	border-radius: 25px;
 }
 
-/* .mb-3 {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-around;
-	height:auto;
-	background-color: #babec2;
-} */
-
 .row.mb-3 {
 	float:right;
 	right: 500px;
 	width: 650px;
 	height: 50px;
-	border: 5px solid #13284C;
+	border: 2px solid #13284C;
 	background-color:whitesmoke;
 	margin-top: 20px;
 	margin-bottom: 20px;
-	border-radius: 25px;
+	border-radius: 5px;
 }
 
 .button1 {
@@ -153,8 +156,65 @@ input {
 	align-items: center;
 	flex-direction: column;
 	justify-content: center;
-	margin-top: 10%;
+	width: 400px;
+	height: 500px;
+	border: 5px solid #13284C;
+	background-color: whitesmoke;
+	border-radius: 25px;
+
 }
 .Logouttext{
+	font-size: larger;
+}
+.profilepic{
+	width: 400px;
+	height: 500px;
+	border: 5px solid #13284C;
+	background-color: whitesmoke;
+	border-radius: 25px;
+	margin-right: 20px;
+}
+.log{
+	display:flex;
+	align-items: center;
+	flex-direction: row;
+	justify-content:center;
+	background-color: #babec2;
+	height: 700px;
+}
+.login-wrap{
+	display:flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: #babec2;
+	height: 900px;
+	padding-top: 10%;
+	font-size: larger;
+}
+
+/************stylings for create auction **************/
+.createauction{
+	display:flex;
+	align-items: center;
+	flex-direction: row;
+	justify-content:center;
+	background-color: #babec2;
+	height: 700px;
+}
+
+/*************stylings for help/about *****************/
+.aboutbody{
+	background-color: #babec2;
+	height: 700px;
+}
+
+/*******************stylings for sign up *********************/
+.signupbody{
+	display:flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: #babec2;
+	height: 900px;
+	padding-top: 10%;
 	font-size: larger;
 }

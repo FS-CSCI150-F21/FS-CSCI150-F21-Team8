@@ -53,29 +53,29 @@ const Signin = () => {
 	if (user){
 		//window.location = '/';
 		return (
-			<div className='LogoutBody'>
-				<div className = "LogoutPic">
-					{user.profilePicture}
-				</div>
-				<div className="Logouttext">
-					{user.displayName} is logged in
-				</div>
-				<div className="LogoutButton">
-					<button onClick = {handleLogout}>logout</button>
+			<div className='log'>
+				<img src={user.profilePicture} class="profilepic"></img> 
+		
+				<div className='LogoutBody'>
+					<div className="Logouttext">
+						{user.displayName} is logged in
+					</div>
+					<div className="LogoutButton">
+						<button onClick = {handleLogout}>logout</button>
+					</div>
 				</div>
 			</div>
 		);
 	}
 	return (
-				<div className="login-wrap">
-					<div className="login-html">
+				<div className="login-wrap" style={{textAlign:"center"}}>
+					<div className="login-html" >
 						{/* <input id="tab-1" type="radio" name="tab" className="sign-in" checked/> */}
 						{/* <label for="tab-1" className="tab"> Sign In</label> */}
 						{/* <input id="tab-2" type="radio" name="tab" className="sign-up"/><label for="tab-2" className="tab">Sign up</label> */}
 							<form className="login-form" onSubmit={(e) => handleSubmit(e)}>
 								<div className="sign-in-htm">
 									<div className="group">
-										<label for="email" className="label">Email</label>
 										<input 
 										type="email" 
 										placeholder="email" 
@@ -86,7 +86,6 @@ const Signin = () => {
 										/>
 									</div>
 									<div className="group">
-										<label for="pass" className="label">Password</label>
 										<input 
 											type="password" 
 											placeholder="password" 

@@ -53,7 +53,7 @@ class App extends Component {
     }
     render() {
         return (
-            <div>
+            <div className="signupbody">
                 <div>
                     <div>
                         <form onSubmit={this.onSubmit}>
@@ -63,7 +63,7 @@ class App extends Component {
                                 value={this.state.displayName}/> <br/>
                             <input type="password" placeholder="password" onChange={this.changePassword}
                                 value={this.state.password} /><br />
-                            <input type="submit" value="submit"/>
+                            <button className="button">Register</button>
                         </form>
                     </div>
                 </div>

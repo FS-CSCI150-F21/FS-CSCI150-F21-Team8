@@ -95,7 +95,7 @@ export default function Create() {
     }
 
     return (
-        <div style={{textAlign:"center"}}>
+        <div style={{textAlign:"center"}} className="createauction">
             <div>
                 <img src = {auction.auctionImages} alt = {""}></img>
             </div>

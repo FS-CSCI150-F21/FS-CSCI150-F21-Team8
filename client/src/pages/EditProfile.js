@@ -105,13 +105,14 @@ function EditProfile() {
 	// 		});
 	// }
 
-	// render() {	
+	// rend
+
 		return (
 
 			<Container>
 				<Row>
 				<Col xs={6} md={4}>
-				<a href=""><img src={profilePicture} class="img3"></img></a>
+				<a href=""><img src={profilePicture} class="img2"></img></a>
 				<input  
                     type="file"
                     accept=".png, .jpg, .jpeg"

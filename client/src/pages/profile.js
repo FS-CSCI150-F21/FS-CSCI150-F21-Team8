@@ -47,7 +47,7 @@ export default class ProfilePage extends React.Component {
 
 	render() {	
 		return (
-			
+			<div className='profilebody'>
 			<Container>
 				<Row>
 				<Col xs={6} md={4}>
@@ -79,7 +79,8 @@ export default class ProfilePage extends React.Component {
 					Password
 					</Form.Label>
 					<Col sm="10">
-					<Link to="/EditProfile"><button>
+						*******************
+					<Link to="/EditProfile"><button className="pwbutton">
 					Change your password
 					</button>
 					</Link>
@@ -132,6 +133,7 @@ export default class ProfilePage extends React.Component {
 				</Row> */}
 
 			</Container>
+			</div>
 		);
 	}
 }
