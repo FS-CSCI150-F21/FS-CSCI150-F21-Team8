@@ -2,6 +2,7 @@ import {useState} from 'react'
 import axios from 'axios'
 import '../App.css';
 import { Redirect } from 'react-router';
+import { textAlign } from '@mui/system';
 const validateInputs = (auction) => {
     if (auction.auctionName === '' 
     || auction.auctionDescription === ''
@@ -32,6 +33,22 @@ export default function Create() {
     const [valid, setValid] = useState(0)
     if (user === undefined) {
         return <Redirect to="/login"/>
+    }
+
+    const redirectToEdit = () => {
+        console.log('redirect')
+        return <Redirect to={{ 
+            pathname: '/auctionpageseller', 
+            state: {auction: auction}
+        }}/>
+    }
+
+    if (valid === 5) {
+        console.log('redirect')
+        return <Redirect to={{ 
+            pathname: '/auctionpageseller', 
+            state: {auction: auction}
+        }}/>
     }
 
     const createAuction = (event) => {
@@ -66,7 +83,10 @@ export default function Create() {
                     console.log(put_params)
                     axios.put(`https://bdh-server.herokuapp.com/user/update?id=${auction.author}`, put_params).then(()=>{
                         console.log('put')
+                        // redirectToEdit()
+                        setValid(5)
                     })
+                    
                 })
             }).catch((res)=>{
                 console.log('caught', res)
@@ -75,7 +95,7 @@ export default function Create() {
     }
 
     return (
-        <div>
+        <div style={{textAlign:"center"}}>
             <div>
                 <img src = {auction.auctionImages} alt = {""}></img>
             </div>
