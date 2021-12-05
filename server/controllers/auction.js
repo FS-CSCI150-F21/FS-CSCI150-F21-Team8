@@ -25,25 +25,29 @@ export const getAuction = async (req, res) => {
             sort['dateClose'] = parseInt(req.query.dateClose)
         }
         if (req.query.datePosted) {
+            
             if (req.query.datePosted == 0 && req.query.dateClose) {
                 delete sort.datePosted
             } else if (req.query.datePosted == -1) {
                 sort['datePosted'] = parseInt(req.query.datePosted)
             }
         }
+        console.log(req.query.tags)
         if (req.query.tags) {
-            query.where('tags', req.query.tags)
+            if (req.query.tags[0] === '') {          
+                query.where('tags.1', req.query.tags[1])
+            } else if (req.query.tags[1] === ''){
+                query.where('tags.0', req.query.tags[0])
+            } else {
+                query.where('tags', req.query.tags)
+            }
+            
         }
-        
+        if(req.query.condition){
+            query.where('condition', req.query.condition)
+        }
         const auction = await query.sort(sort).limit(num).exec()
-        // console.log(auction.auctionImages)
-        // if (req.query.image) {
-            // res.sendFile("auction-images/" + auction[0].auctionImages, {root: process.cwd()})
-            // console.log(auction)
-            // res.status(200).json(auction.auctionImages)
-        // } else {
-            res.status(200).json(auction);
-        // }
+        res.status(200).json(auction);
         
     } catch (error) {
         console.log(error.message)
