@@ -49,6 +49,11 @@ html{
 }
 
 /* stylings for auctionpageseller/buyer*/
+
+.countdown-timer span{
+	margin-left: 3px;
+	margin-right: 3px;
+}
 .img2 {
 	width: 500px;
 	height: 600px;
@@ -120,6 +125,10 @@ input {
 	margin-left: 10%;
 	margin-top: 3px;
 }
+.profileRating{
+	margin-left: 10%;
+	margin-top: 10px;	
+}
 .img3 {
 	width: 200px;
 	height: 200px;
@@ -161,11 +170,11 @@ input {
 	border: 5px solid #13284C;
 	background-color: whitesmoke;
 	border-radius: 25px;
-
 }
 .Logouttext{
 	font-size: larger;
 }
+
 .profilepic{
 	width: 400px;
 	height: 500px;
@@ -216,5 +225,13 @@ input {
 	background-color: #babec2;
 	height: 900px;
 	padding-top: 10%;
+	font-size: larger;
+}
+
+/***************stylings for forgot password ***************/
+.forgotPWpage{
+	background-color: #babec2;
+	height: 900px;
+	padding-top: 25px;
 	font-size: larger;
 }

@@ -29,7 +29,7 @@ const Forgot = () => {
 
     }
     return (
-        <div>
+        <div className="forgotPWpage">
            <h5>Forgot your Password?</h5>
            <h5>Please provide your email address in the box below and we will send a "change" your password link to your email.</h5>
             <input

@@ -8,8 +8,7 @@ import { useLocation } from "react-router";
 import Rating from '@mui/material/Rating';
 import Box from '@mui/material/Box';
 import axios from "axios";
-
-
+import CountdownTimer from '../components/Navbar/CountdownTimer/CountdownTimer';
 
 const labels = {
 	1: 'Horrendous',
@@ -27,6 +26,11 @@ export default function AuctionPageBuyer () {
 
 	let location = useLocation();
   	console.log(location);  //testing if post from home page passed properly
+	
+	  //retrieving timestamp for countdowntimer
+	let closedate = new Date(location.state.auction.dateClose)
+	var timestamp = closedate.getTime();
+	console.log(timestamp)	//verify retrieval of timestamp
 
 	const [user, setUser] = useState({
 		_id: '',
@@ -62,11 +66,18 @@ export default function AuctionPageBuyer () {
 		}
 	};
 
+	var highestBid = ''
+	if (location.state.auction.biddingHistory[0] == null){
+		highestBid = location.state.auction.startingBid;
+	}
+	else{
+		highestBid = location.state.auction.biddingHistory[location.state.auction.biddingHistory.length-1].bidAmount
+	}
+
 	const validateInputs = (put_params) => {
 		if (put_params.bid.bidAmount === '' 
 		|| put_params.bid.bidAmount === '0'
 		|| put_params.bid.bidAmount <= location.state.auction.startingBid
-		|| location.state.auction.biddingHistory[0] === null
 		|| (isNaN(put_params.bid.bidAmount))
 		) {
 			return true
@@ -80,8 +91,6 @@ export default function AuctionPageBuyer () {
 	const placeBid= (event) => {
 		event.preventDefault();
 		if (validateInputs(put_params)){
-			console.log("Bid is not high enough")		//verify if bid amount is acceptable
-			//console.log(location.state.auction.biddingHistory[location.state.auction.biddingHistory.length -1])
 			setValid(1)
 			if(isNaN(put_params.bid.bidAmount)){
 				setValid(2)
@@ -91,22 +100,23 @@ export default function AuctionPageBuyer () {
 			if(location.state.auction.biddingHistory[0] == null){
 				if(put_params.bid.bidAmount > location.state.auction.startingBid){
 					console.log("input number is high enough") //bid amount is acceptable
-				setValid(0)
-				axios.put(`https://bdh-server.herokuapp.com/auction/update?id=${location.state.auction._id}`, put_params).then((response)=>{
-                    console.log(response.data.message)
-                    })
-				console.log(location.state.auction)
+					setValid(0)
+					axios.put(`https://bdh-server.herokuapp.com/auction/update?id=${location.state.auction._id}`, put_params).then((response)=>{
+                    	console.log(response.data.message)
+                    	})
 				}
 				
 			}
 			else{
-				if (put_params.bid.bidAmount <= location.state.auction.biddingHistory[location.state.auction.biddingHistory.length -1].bidAmount) {
+				if (put_params.bid.bidAmount <= location.state.auction.biddingHistory[location.state.auction.biddingHistory.length-1].bidAmount) {
 				setValid(1)
 				}
 				console.log("input number is high enough") //bid amount is acceptable
 				setValid(0)
+				console.log(location.state.auction._id)
 				axios.put(`https://bdh-server.herokuapp.com/auction/update?id=${location.state.auction._id}`, put_params).then((response)=>{
                     console.log(response.data.message)
+					highestBid = location.state.auction.biddingHistory[location.state.auction.biddingHistory.length-1].bidAmount
                     })
 				console.log(location.state.auction)
 			}
@@ -155,9 +165,12 @@ export default function AuctionPageBuyer () {
 						</Form>
 
 						<div className="bidBody">
-							<div classname="auctionTimer">
-								enter some sort of highest bid
-							</div>
+						<div className = "auctionTimer">
+							<div> Time Until Auction Closes </div>
+							<CountdownTimer countdownTimestampMs={timestamp}/>
+							<div> </div>
+							<div> Current Highest Bid: ${location.state.auction.biddingHistory[location.state.auction.biddingHistory.length -1].bidAmount} </div>
+						</div>
 
 							<div classname="PostBids">
 								
@@ -220,7 +233,10 @@ export default function AuctionPageBuyer () {
 
 					<div className ="bidBody">
 						<div className = "auctionTimer">
-							input my timer here
+							<div> Time Until Auction Closes </div>
+							<CountdownTimer countdownTimestampMs={timestamp}/>
+							<div> </div>
+							<div> Current Highest Bid: ${highestBid} </div>
 						</div>
 						<div className="PostBids">
 							<Form onSubmit={placeBid}>

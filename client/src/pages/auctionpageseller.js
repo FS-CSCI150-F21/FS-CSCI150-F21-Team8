@@ -8,6 +8,7 @@ import Rating from '@mui/material/Rating';
 import Box from '@mui/material/Box';
 import axios from "axios";
 import { NavLink } from '../components/Navbar/NavbarElements';
+import CountdownTimer from '../components/Navbar/CountdownTimer/CountdownTimer';
 //this page is where the seller is redirected to to view their auction
 
 const labels = {
@@ -26,6 +27,10 @@ export default function AuctionPageSeller () {
 
 	let location = useLocation();
   	console.log(location.state);  //testing if post from home page passed properly
+	  //retrieving timestamp for countdowntimer
+	let closedate = new Date(location.state.auction.dateClose)
+	var timestamp = closedate.getTime();
+	console.log(timestamp)	//verify retrieval of timestamp
 
 	const [user, setUser] = useState({
 		_id: '',
@@ -90,7 +95,9 @@ export default function AuctionPageSeller () {
 
 						<div className = "bidBody">
 							<div>
-								
+							<div> Time Until Auction Closes </div>
+							<CountdownTimer countdownTimestampMs={timestamp}/>
+							<div> </div>
 							</div>
 
 							<div className = "editAuctionOption">

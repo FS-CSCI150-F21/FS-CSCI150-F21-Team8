@@ -1,9 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import Box from '@mui/material/Box';
+import Rating from '@mui/material/Rating'
 import { Button, Container, Form, Image, Row, Col } from 'react-bootstrap';
 
-
+const labels = {
+	1: 'Horrendous',
+	1.5: 'Poor',
+	2: 'Poor+',
+	2.5: "OK",
+	3: 'OK+',
+	3.5: "Good",
+	4: 'Good+',
+	4.5: 'Excellent',
+	5: 'Excellent+'
+};
 
 export default class ProfilePage extends React.Component {
 	constructor(props) {
@@ -101,7 +113,12 @@ export default class ProfilePage extends React.Component {
 					Rating
 					</Form.Label>
 					<Col sm="10">
-					<Form.Control plaintext readOnly defaultValue={this.state.rating} />
+					<div className="profileRating">
+						<Box sx={{ width: 200, display: 'flex', alighnItems: 'center',}}>
+							<Rating name="read-rating" value = {this.state.rating} readOnly precision={0.5}/>
+							<Box sx={{ml: 2}}> {labels[this.state.rating]} </Box>
+						</Box>
+					</div>
 					</Col>
 				</Form.Group>
 

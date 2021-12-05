@@ -52,6 +52,9 @@ export default function AuctionPageSellerEdit () {
 	}, []);
     
     /*************edit auction logic ****************/
+
+	const [valid, setValid] = useState(0);
+
      const [auction, setAuction] = useState({ 
 		auctionName: location.state.auction.auctionName,
         auctionDescription: location.state.auction.auctionDescription,
@@ -60,6 +63,7 @@ export default function AuctionPageSellerEdit () {
     
 	
     const editAuction= (event) => {
+		setValid(0)
 		event.preventDefault()
         const iform = new FormData();
         iform.append("file", auction.auctionImages)
@@ -74,8 +78,17 @@ export default function AuctionPageSellerEdit () {
 			axios.put(`https://bdh-server.herokuapp.com/auction/update?id=${location.state.auction._id}`, auction).then((response)=>{
 				console.log(response.data.message)
 				console.log(location.state.auction.auctionImages)
+				setValid(1)
 				})
 		})
+    }
+
+	if (valid === 1) {
+        console.log('redirect')
+        return <Redirect to={{ 
+            pathname: '/', 
+            state: {auction: auction}
+        }}/>
     }
 
 	/*****************Delete Auction Logic *****************************/
@@ -131,7 +144,7 @@ export default function AuctionPageSellerEdit () {
                                     onChange={(event)=>{
                                         setAuction({...auction, auctionImages: event.target.files[0]})
                                     }}
-                />
+                				/>
 								</Col>
 							</Form.Group>
 	

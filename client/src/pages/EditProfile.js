@@ -64,48 +64,7 @@ function EditProfile() {
 				})
 		})		
 	  }
-
 	
-
-// export default class Profile extends React.Component {
-// 	constructor(props) {
-// 		super(props);
-
-// 		this.state = {
-// 			email: "",
-// 			displayName: "",
-// 			password: "",
-// 			profilePicture: "",
-// 			rating: "",
-// 			phoneNumber: "",
-// 			description: ""
-// 		};
-// 	}
-
-	// componentDidMount() {
-	// 		// axios.get('http://localhost:5000/user/get?email=test1@gmail.com')
-	// 		axios.get('https://bdh-server.herokuapp.com/user/get?email=test1@gmail.com')
-	// 			.then((response) => {
-	// 				console.log(response.data);
-					
-	// 				this.setState({
-	// 					displayName: response.data[0].displayName,
-	// 					email: response.data[0].email,
-	// 					password: response.data[0].password,
-	// 					phoneNumber: response.data[0].phoneNumber,
-	// 					description: response.data[0].description,
-	// 					rating: response.data[0].rating,
-	// 					profilePicture: response.data[0].profilePicture
-	// 				});
-
-	// 				console.log(this.state.displayName);
-	// 			})
-	// 			.catch(function (error) {
-	// 				console.log(error);
-	// 		});
-	// }
-
-	// rend
 
 		return (
 
