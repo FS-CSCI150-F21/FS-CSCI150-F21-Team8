@@ -8,10 +8,11 @@ import { Nav, NavLink, Bars, NavMenu, NavBtn, NavBtnLink } from '../components/N
 import styled from 'styled-components';
 import { Grid, Typography } from '@mui/material';
 import { Button } from 'bootstrap';
+import { rootShouldForwardProp } from '@mui/material/styles/styled';
 
 
 
-class Home extends React.Component {
+class yourauctions extends React.Component {
 
     state = {
         auctionName: '',
@@ -22,13 +23,12 @@ class Home extends React.Component {
         condition: '',
         date: '1',
         query: 'num=20',
+        author: ''
     };
     componentDidMount = () => {
         this.getAuction();
     };
     getAuction = () => {
-        {/*https://bdh-server.herokuapp.com/auction/get?num=10 */ }
-        {/*http://localhost:5000/auction/get?num=20 */}
         console.log(this.state)
         axios.get(`https://bdh-server.herokuapp.com/auction/get?${this.state.query}`)
             .then((response) => {
@@ -42,20 +42,24 @@ class Home extends React.Component {
             })
     };
 
-    onSearch = (event) => {
-        event.preventDefault()
-        let tags = (this.state.tags[0] === '' && this.state.tags[1] === '') ? '' : `&tags[]=${this.state.tags[0]}&tags[]=${this.state.tags[1]}` 
-        let q = `num=20&auctionName=${this.state.search}&condition=${this.state.condition}&datePosted=${this.state.date}${tags}`
-        this.setState({...this.state, query: q}, ()=>{
-            this.getAuction()
-        })
-    }
+
+     user = JSON.parse(localStorage.getItem('user'))
+
 
     display = (posts) => {
-        console.log(!posts.length)
+        console.log("here")
+        console.log(posts.length)
         if (!posts.length) return null;
 
-        return posts.map((post, index) => (
+        var yourcards = []
+        for (var i = 0; i < posts.length; i++){
+            if (posts[i].author === this.user._id){
+                yourcards.push(posts[i]);
+            }
+        }
+        
+
+        return yourcards.map((post, index) => (
             <Grid key={index} xs={12} sm={6} md={4} lg={3}>
                 <div className="cardwrapper">
                             <Card className="cardClass">
@@ -76,11 +80,10 @@ class Home extends React.Component {
         );
     };
 
-
     render() {
         return (
             <div className="homeBody">
-                <h1>Home</h1>
+                <h1>Your Auctions</h1>
                 <div className = "Tagssearch" style={{textAlign:"center", paddingBottom:"1rem"}}>
                     <form  >
                         <input className="searchbar"
@@ -164,4 +167,4 @@ class Home extends React.Component {
     }
 }
 
-export default Home
+export default yourauctions

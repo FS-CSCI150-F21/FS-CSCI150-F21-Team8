@@ -67,7 +67,7 @@ function EditProfile() {
 	
 
 		return (
-
+			<div className="editprofilebody">
 			<Container>
 				<Row>
 				<Col xs={6} md={4}>
@@ -192,6 +192,7 @@ function EditProfile() {
 				</Row>
 
 			</Container>
+			</div>
 		);
 	}
 // }

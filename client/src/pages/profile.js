@@ -134,10 +134,20 @@ export default class ProfilePage extends React.Component {
 				{/* <Button variant="primary" className="buttonE" >Edit your Profile</Button>{' '} */}
 				</Form>
 				</Col>
-				<Link to="/EditProfile"><button>
-              	Edit your profile
-            	</button>
-				</Link>
+				<div className = "profilebuttons">
+					<div>
+						<Link to="/EditProfile"><button>
+						Edit your profile
+						</button>
+						</Link>
+					</div>
+					<div>
+						<Link to="/yourAuctions"><button>
+						Your Auctions
+						</button>
+						</Link>
+					</div>
+				</div>
 
 				{/* <Button variant="primary" className="button1" >Edit your Profile</Button>{' '} */}
 				{/* <Button variant="primary">Edit your Profile</Button>{' '} */}

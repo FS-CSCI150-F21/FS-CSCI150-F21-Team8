@@ -44,8 +44,16 @@ html{
 }
 
 .homeBody {
-	height: auto;
+	height: max content;
 	background-color: #babec2;
+}
+
+.searchbar{
+	height: 40px;
+	width: 400px;
+}
+.searchtags{
+	height: 40px;
 }
 
 /* stylings for auctionpageseller/buyer*/
@@ -87,7 +95,7 @@ html{
 	flex-direction: row;
 	justify-content:space-between;
 	height:auto;
-	margin-top: 20%;
+	margin-top: 10%;
 }
 
 button {
@@ -113,10 +121,19 @@ input {
 	padding: 7px 0px;
 }
 
-/*stylings for profile page */
+/*****************stylings for profile page ********************/
+.editprofilebody{
+	background-color: #babec2;
+	height:max-content;
+}
+.profilebuttons{
+	display: flex;
+	flex-direction: row;
+	padding-left: 10%;
+}
 .profilebody{
 	background-color: #babec2;
-	height: 700px;
+	height: max-content;
 }
 .pwbutton{
 	background-color: #13284C;

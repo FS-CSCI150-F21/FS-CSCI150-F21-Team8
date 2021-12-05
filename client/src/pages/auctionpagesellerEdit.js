@@ -55,12 +55,16 @@ export default function AuctionPageSellerEdit () {
 
 	const [valid, setValid] = useState(0);
 
+	const closedate = new Date(location.state.auction.dateClose)
+
+	
      const [auction, setAuction] = useState({ 
 		auctionName: location.state.auction.auctionName,
         auctionDescription: location.state.auction.auctionDescription,
-        auctionImages: location.state.auction.auctionImages
+        auctionImages: location.state.auction.auctionImages,
+		dateClose: closedate
 	});
-    
+
 	
     const editAuction= (event) => {
 		setValid(0)
@@ -73,15 +77,24 @@ export default function AuctionPageSellerEdit () {
 			url = res.data.url
 			setAuction({...auction, auctionImages: url})
 			auction.auctionImages = url
-			console.log("below is current auction images")
-			console.log(auction.auctionImages)
 			axios.put(`https://bdh-server.herokuapp.com/auction/update?id=${location.state.auction._id}`, auction).then((response)=>{
 				console.log(response.data.message)
-				console.log(location.state.auction.auctionImages)
 				setValid(1)
 				})
 		})
     }
+
+
+	/*****************Delete Auction Logic *****************************/
+	const handleDelete = () => {
+		console.log("attempting delete")
+		axios.delete(`https://bdh-server.herokuapp.com/auction/delete?id=${location.state.auction._id}`).then((response)=>{
+			console.log(response.data.message)
+			console.log("Delete")
+			setValid(1)
+		})
+
+	}
 
 	if (valid === 1) {
         console.log('redirect')
@@ -91,15 +104,7 @@ export default function AuctionPageSellerEdit () {
         }}/>
     }
 
-	/*****************Delete Auction Logic *****************************/
-	const handleDelete = () => {
-		console.log("attempting delete")
-		axios.delete(`https://bdh-server.herokuapp.com/auction/delete?id=${location.state.auction._id}`).then((response)=>{
-			console.log(response.data.message)
-			console.log(location.state.auction.auctionName)
-		})
-
-	}
+	
 
 	return (
 			<div className="Body">
@@ -128,6 +133,18 @@ export default function AuctionPageSellerEdit () {
                                         placeholder={location.state.auction.auctionDescription} value={auction.auctionDescription}
                                         onChange={(event) =>{
                                             setAuction({...auction, auctionDescription: event.target.value})
+                                        }} />
+								</Col>
+							</Form.Group>
+
+							<Form.Group as={Row} className="auctionRows" controlId="formPlaintextDate">
+								<Form.Label column sm="3"> Close Date </Form.Label>
+								<Col sm="">
+                                <textarea type="date" rows="1" cols="60" 
+                                        placeholder="Month Day Year ex. January 1, 2025" 
+                                        onChange={(event) =>{
+											const newdate = new Date(event.target.value)
+                                            setAuction({...auction, dateClose: newdate})
                                         }} />
 								</Col>
 							</Form.Group>

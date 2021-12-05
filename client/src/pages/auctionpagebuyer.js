@@ -54,6 +54,18 @@ export default function AuctionPageBuyer () {
 	useEffect(() => {
 		getUserInfo();
 	}, []);
+
+	/********copying auction data ****************************/
+	const auction2 = {
+		_id: location.state.auction._id,
+        auctionName: location.state.auction.auctionName,
+        auctionDescription: location.state.auction.auctionDescription,
+        auctionImages: location.state.auction.auctionImages,
+        author: location.state.auction.author,
+    	startingBid:  location.state.auction.startingBid,
+        dateClose:  location.state.auction.dateClose,
+        biddingHistory: location.state.auction.biddingHistory,
+    }
   
 	/**********************Post Bid Logic  ***********************************/
 
@@ -97,10 +109,11 @@ export default function AuctionPageBuyer () {
 			}
 		}
 		else{
+			setValid(0)
 			if(location.state.auction.biddingHistory[0] == null){
 				if(put_params.bid.bidAmount > location.state.auction.startingBid){
 					console.log("input number is high enough") //bid amount is acceptable
-					setValid(0)
+					setValid(5)
 					axios.put(`https://bdh-server.herokuapp.com/auction/update?id=${location.state.auction._id}`, put_params).then((response)=>{
                     	console.log(response.data.message)
                     	})
@@ -112,16 +125,24 @@ export default function AuctionPageBuyer () {
 				setValid(1)
 				}
 				console.log("input number is high enough") //bid amount is acceptable
-				setValid(0)
+				setValid(5)
 				console.log(location.state.auction._id)
 				axios.put(`https://bdh-server.herokuapp.com/auction/update?id=${location.state.auction._id}`, put_params).then((response)=>{
                     console.log(response.data.message)
 					highestBid = location.state.auction.biddingHistory[location.state.auction.biddingHistory.length-1].bidAmount
+					setValid(5)
                     })
-				console.log(location.state.auction)
 			}
 		}
 	};
+
+	if (valid === 5) {
+        console.log('redirect')
+        return <Redirect to={{ 
+            pathname: '/', 
+            state: {auction: auction2}
+        }}/>
+    }
 
 	/**********************Redirect Auction Page Logic **********************/
 

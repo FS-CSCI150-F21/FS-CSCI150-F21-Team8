@@ -15,6 +15,7 @@ import Forgot from './pages/forgot';
 import Verify from './pages/verify';
 import ProfilePage from './pages/profile';
 import EditProfile from './pages/EditProfile';
+import yourauctions from './pages/yourAuctions'
 
 export const AuthContext = React.createContext()
 
@@ -39,6 +40,8 @@ function App() {
               <Route path="/auctionpagesellerEdit" component={AuctionPageSellerEdit} />
               <Route path="/profile" component={ProfilePage} />
               <Route path="/EditProfile" component={EditProfile} />
+              <Route path="/yourAuctions" component={yourauctions} />
+
            </Switch>
            </AuthContext.Provider>
     </Router>
