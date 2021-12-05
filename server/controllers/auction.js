@@ -73,10 +73,15 @@ export const createAuction = async (req, res) => {
 
 export const deleteAuction = async (req, res) => {
     // deleting by id, will change to add more later
-    const id = req.params.id;
+    
     try {
-        await AuctionData.findByIdAndRemove(id).exec();
-        res.status(200).json({message: 'Auction Deleted.'});
+        if (req.query.id) {
+            const id = req.query.id;
+            await AuctionData.findByIdAndRemove(id).exec();
+            res.status(200).json({message: 'Auction Deleted.'});
+        } else {
+            throw new Error("Must provide id")
+        }
     } catch (error) {
         res.status(500).json({message: error.message})     
     }
@@ -123,6 +128,9 @@ export const updateAuction = async (req, res) => {
         }
         if (req.body.auctionImages) {
             auction.auctionImages = req.body.auctionImages
+        }
+        if (req.body.dateClose) {
+            auction.dateClose = req.body.dateClose
         }
         await auction.save()
         res.status(200).json({message: "Success"})

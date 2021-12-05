@@ -5,7 +5,7 @@ import { createAuction, deleteAuction, getAuction, updateAuction } from '../cont
 const router = express.Router()
 
 router.get('/get', getAuction);
-router.delete('/:id', deleteAuction);
+router.delete('/', deleteAuction);
 router.post('/', createAuction);
 router.put('/:id', updateAuction)
 
