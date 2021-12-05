@@ -217,7 +217,13 @@ input {
 	padding-top: 10%;
 	font-size: larger;
 }
-
+.links{
+	display: flex;
+	justify-content: center;
+}
+.reg{
+	padding-left: 25px;;
+}
 /************stylings for create auction **************/
 .createauction{
 	display:flex;

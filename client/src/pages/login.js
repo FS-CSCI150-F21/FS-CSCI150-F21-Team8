@@ -102,9 +102,15 @@ const Signin = () => {
 										<button className="button">Sign in</button>
 									</div>
 									<div className="hr"></div>
-									<div className="foot-lnk">
+									<div className="links">
+									<div className="forgotpw">
 										{/* <a href="#forgot"> Forgot Password?</a> */}
 										<Link to="/forgot">Forgot Password?</Link>
+									</div>
+									<div className="reg">
+										{/* <a href="#forgot"> Forgot Password?</a> */}
+										<Link to="/signup">Register</Link>
+									</div>
 									</div>
 								</div>
 							</form>
