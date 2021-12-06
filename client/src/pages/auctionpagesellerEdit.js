@@ -88,7 +88,7 @@ export default function AuctionPageSellerEdit () {
 	/*****************Delete Auction Logic *****************************/
 	const handleDelete = () => {
 		console.log("attempting delete")
-		axios.delete(`https://bdh-server.herokuapp.com/auction/delete?id=${location.state.auction._id}`).then((response)=>{
+		axios.delete(`https://bdh-server.herokuapp.com/auction/?id=${location.state.auction._id}`).then((response)=>{
 			console.log(response.data.message)
 			console.log("Delete")
 			setValid(1)
