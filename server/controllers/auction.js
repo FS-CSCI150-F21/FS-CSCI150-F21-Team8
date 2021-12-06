@@ -105,14 +105,14 @@ export const updateAuction = async (req, res) => {
         if (req.body.bid) {
             console.log(req.body.bid)
             if (auction.biddingHistory.length > 0) {
-                if (req.body.bid.bidAmount <= auction.biddingHistory[auction.biddingHistory.length - 1].bidAmount) {
+                if (parseFloat(req.body.bid.bidAmount) <= parseFloat(auction.biddingHistory[auction.biddingHistory.length - 1].bidAmount)) {
                     throw new Error('Bid amount must be greater than current bid.')
                 }
                 if (req.body.bid.userBidding === auction.biddingHistory[auction.biddingHistory.length - 1].userBidding) {
                     throw new Error('The same user cannot bid twice in a row')
                 }
             }
-            if (auction.startingBid > req.body.bid.bidAmount) {
+            if (parseFloat(auction.startingBid) > parseFloat(req.body.bid.bidAmount)) {
                 throw new Error('Bid amount must be greater than starting bid.')
             }
             if (auction.author === req.body.userBidding) {
@@ -133,7 +133,8 @@ export const updateAuction = async (req, res) => {
             auction.dateClose = req.body.dateClose
         }
         await auction.save()
-        res.status(200).json({message: "Success"})
+        // res.status(200).json({message: "Success"})
+        res.status(200).json(auction)
     } catch (error) {
         res.status(404).json({message: error.message})
     }

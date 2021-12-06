@@ -66,6 +66,17 @@ export default function AuctionPageBuyer () {
         dateClose:  location.state.auction.dateClose,
         biddingHistory: location.state.auction.biddingHistory,
     }
+
+	const [auct, setAuct] = useState({
+		_id: location.state.auction._id,
+        auctionName: location.state.auction.auctionName,
+        auctionDescription: location.state.auction.auctionDescription,
+        auctionImages: location.state.auction.auctionImages,
+        author: location.state.auction.author,
+    	startingBid:  location.state.auction.startingBid,
+        dateClose:  location.state.auction.dateClose,
+        biddingHistory: location.state.auction.biddingHistory,
+    })
   
 	/**********************Post Bid Logic  ***********************************/
 
@@ -78,6 +89,13 @@ export default function AuctionPageBuyer () {
 		}
 	};
 
+	const [put, setPut] = useState({
+		bid:{
+			userBidding: "",
+			bidAmount: 0,
+		}
+	})
+
 	var highestBid = ''
 	if (location.state.auction.biddingHistory[0] == null){
 		highestBid = location.state.auction.startingBid;
@@ -89,7 +107,7 @@ export default function AuctionPageBuyer () {
 	const validateInputs = (put_params) => {
 		if (put_params.bid.bidAmount === '' 
 		|| put_params.bid.bidAmount === '0'
-		|| put_params.bid.bidAmount <= location.state.auction.startingBid
+		|| put_params.bid.bidAmount <= auct.startingBid
 		|| (isNaN(put_params.bid.bidAmount))
 		) {
 			return true
@@ -101,116 +119,64 @@ export default function AuctionPageBuyer () {
 	
 
 	const placeBid= (event) => {
+		console.log("put", put)
 		event.preventDefault();
-		if (validateInputs(put_params)){
+		if (validateInputs(put)){
 			setValid(1)
-			if(isNaN(put_params.bid.bidAmount)){
+			if(isNaN(put.bid.bidAmount)){
 				setValid(2)
 			}
 		}
 		else{
 			setValid(0)
 			if(location.state.auction.biddingHistory[0] == null){
-				if(put_params.bid.bidAmount > location.state.auction.startingBid){
-					console.log("input number is high enough") //bid amount is acceptable
+				if(parseFloat(put.bid.bidAmount) > parseFloat(auct.startingBid)){
+					// console.log("input number is high enough") //bid amount is acceptable
 					setValid(5)
-					axios.put(`https://bdh-server.herokuapp.com/auction/update?id=${location.state.auction._id}`, put_params).then((response)=>{
+					axios.put(`https://bdh-server.herokuapp.com/auction/update?id=${location.state.auction._id}`, put).then((response)=>{
                     	console.log(response.data.message)
                     	})
 				}
 				
 			}
 			else{
-				if (put_params.bid.bidAmount <= location.state.auction.biddingHistory[location.state.auction.biddingHistory.length-1].bidAmount) {
-				setValid(1)
+				console.log("put", put)
+				if (parseFloat(put.bid.bidAmount) <= parseFloat(auct.biddingHistory[location.state.auction.biddingHistory.length-1].bidAmount)) {
+					setValid(1)
 				}
-				console.log("input number is high enough") //bid amount is acceptable
+				if (put.bid.userBidding === auct.biddingHistory[location.state.auction.biddingHistory.length-1].userBidding){
+					setValid(3)
+				}
+				console.log("input number is high enough", put_params, put) //bid amount is acceptable
 				setValid(5)
-				console.log(location.state.auction._id)
-				axios.put(`https://bdh-server.herokuapp.com/auction/update?id=${location.state.auction._id}`, put_params).then((response)=>{
-                    console.log(response.data.message)
-					highestBid = location.state.auction.biddingHistory[location.state.auction.biddingHistory.length-1].bidAmount
+				// console.log(location.state.auction._id)
+				axios.put(`https://bdh-server.herokuapp.com/auction/update?id=${location.state.auction._id}`, put).then((response)=>{
+                    console.log(response.data)
+					// highestBid = location.state.auction.biddingHistory[location.state.auction.biddingHistory.length-1].bidAmount
+					setAuct(response.data)
 					setValid(5)
                     })
 			}
 		}
 	};
 
-	if (valid === 5) {
-        console.log('redirect')
-        return <Redirect to={{ 
-            pathname: '/', 
-            state: {auction: auction2}
-        }}/>
-    }
+	// if (valid === 5) {
+    //     console.log('redirect')
+    //     return <Redirect to={{ 
+    //         pathname: '/', 
+    //         state: {auction: auction2}
+    //     }}/>
+    // }
 
 	/**********************Redirect Auction Page Logic **********************/
 
-	//if noones logged in, only display the auction details, time left, and price. No postbid option
-	if (loggedinuser === null){
-		return (
-			<div className="Body">
-				<div className="itempicture">
-					<img src={location.state.auction.auctionImages} class="img2"></img> 
-				</div>
-	
-				<div className="ProductDescription">
-					<Container>
-						<Form classname="auctionDetails">
-							<Form.Group as={Row} className="auctionRows" controlId="formPlaintextItemName">
-								<Form.Label column sm="3"> Item Name </Form.Label>
-								<Col sm="">
-									<Form.Control plaintext readOnly defaultValue={location.state.auction.auctionName} />
-								</Col>
-							</Form.Group>
-	
-							<Form.Group as={Row} className="auctionRows" controlId="formPlaintextDescription">
-								<Form.Label column sm="3"> Item Description </Form.Label>
-								<Col sm="">
-								<Form.Control as="textarea" rows="5" plaintext readOnly defaultValue={location.state.auction.auctionDescription} />
-								</Col>
-							</Form.Group>
-	
-							<Form.Group as={Row} className="auctionRows" controlId="formPlaintextAuthor">
-								<Form.Label column sm="3"> Author Name </Form.Label>
-								<Col sm="">
-									<Form.Control plaintext readOnly defaultValue={user.displayName} />
-								</Col>
-								<Col sm="">
-									<Box sx={{ width: 200, display: 'flex', alighnItems: 'center',}}>
-										<Rating name="read-rating" value = {user.rating} readOnly precision={0.5}/>
-										<Box sx={{ml: 2}}> {labels[user.rating]} </Box>
-									</Box>
-								</Col>
-							</Form.Group>
-						</Form>
-
-						<div className="bidBody">
-						<div className = "auctionTimer">
-							<div> Time Until Auction Closes </div>
-							<CountdownTimer countdownTimestampMs={timestamp}/>
-							<div> </div>
-							<div> Current Highest Bid: ${location.state.auction.biddingHistory[location.state.auction.biddingHistory.length -1].bidAmount} </div>
-						</div>
-
-							<div classname="PostBids">
-								
-							</div>
-						</div>
-					</Container>
-				</div> 
-			</div> //end Body 
-	
-		  ) //end return
-	}
-
 
 	//if logg in user is the author, go to seller's page
-	if (loggedinuser._id === location.state.auction.author) {
+	if (loggedinuser !== null && loggedinuser._id === location.state.auction.author) {
         console.log ("this is a seller's item")//verify the logged in user is the seller of they
 		return <Redirect to={{
 			pathname: '/auctionpageseller',
-			state: {auction: location.state.auction}
+			state: {auction: auct}
 		}}/>
     } 
 	
@@ -218,7 +184,7 @@ export default function AuctionPageBuyer () {
 	return (
     	<div className="Body">
         	<div className="itempicture">
-            	<img src={location.state.auction.auctionImages} class="img2"></img> 
+            	<img src={auct.auctionImages} class="img2"></img> 
             </div>
 
 			<div className="ProductDescription">
@@ -227,14 +193,14 @@ export default function AuctionPageBuyer () {
 						<Form.Group as={Row} className="auctionRows" controlId="formPlaintextItemName">
 							<Form.Label column sm="3"> Item Name </Form.Label>
 							<Col sm="">
-								<Form.Control plaintext readOnly defaultValue={location.state.auction.auctionName} />
+								<Form.Control plaintext readOnly defaultValue={auct.auctionName} />
 							</Col>
 						</Form.Group>
 
 						<Form.Group as={Row} className="auctionRows" controlId="formPlaintextDescription">
 							<Form.Label column sm="3"> Item Description </Form.Label>
 							<Col sm="" >
-								<Form.Control as="textarea" rows="5" plaintext readOnly defaultValue={location.state.auction.auctionDescription} />
+								<Form.Control as="textarea" rows="5" plaintext readOnly defaultValue={auct.auctionDescription} />
 							</Col>
 						</Form.Group>
 
@@ -257,11 +223,11 @@ export default function AuctionPageBuyer () {
 							<div> Time Until Auction Closes </div>
 							<CountdownTimer countdownTimestampMs={timestamp}/>
 							<div> </div>
-							<div> Current Highest Bid: ${highestBid} </div>
+							<div> Current Highest Bid: ${auct.biddingHistory.length == 0 ? auct.startingBid : auct.biddingHistory[auct.biddingHistory.length-1].bidAmount} </div>
 						</div>
 						<div className="PostBids">
-							<Form onSubmit={placeBid}>
-								<div>
+							{loggedinuser && <Form onSubmit={placeBid}>
+							<div>
 									<input  
 									type="text"
 									placeholder = "Bid Amount"
@@ -270,15 +236,17 @@ export default function AuctionPageBuyer () {
 									onChange={(event)=>{
 										put_params.bid.userBidding = loggedinuser._id
 										put_params.bid.bidAmount = event.target.value
+										setPut({bid: {userBidding: loggedinuser._id, bidAmount: event.target.value}})
 									}}
 									/>
 								</div>
 								<div>
                    					<input type='submit'></input>
 								</div>
-							</Form>
+							</Form>}
 							{valid === 1 && <div>Bid Amount is Too Low</div>}
             				{valid === 2 && <div>Bid must be a number.</div>}
+							{valid === 3 && <div>Cannot bid twice in a row.</div>}
 						</div>
 					</div>	
 				</Container>
