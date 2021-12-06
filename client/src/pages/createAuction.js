@@ -155,13 +155,24 @@ export default function Create() {
                         }}
                     >
                         <option value="" selected>Subject</option>
-                        <option value="Computer Science">Computer Science</option>
+                        <option value="Art">Art</option>
                         <option value="Biology">Biology</option>
+                        <option value="Business">Business</option>
                         <option value="Chemistry">Chemistry</option>
                         <option value="Computer Engineering">Computer Engineering</option>
-                        <option value="Mathematics">Mathematics</option>
-                        <option value="Philosophy">Philosophy</option>
+                        <option value="Computer Science">Computer Science</option>
+                        <option value="Communication">Communication</option>
+                        <option value="Electrical Engineering">Electrical Engineering</option>
+                        <option value="Environmental Sciences">Environmental Sciences</option>
+                        <option value="Geology">Geology</option>
+                        <option value="Health Science">Health Science</option>
                         <option value="History">History</option>
+                        <option value="Mathematics">Mathematics</option>
+                        <option value="Mechanical Engineering">Mechanical Engineering</option>
+                        <option value="Music">Music</option>
+                        <option value="Philosophy">Philosophy</option>
+                        <option value="Physics">Physics</option>
+                        <option value="Political Science">Political Science</option>
                         <option value="Other">Other</option>
 
                     </select>
