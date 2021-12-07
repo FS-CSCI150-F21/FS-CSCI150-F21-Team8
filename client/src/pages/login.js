@@ -53,15 +53,31 @@ const Signin = () => {
 				})
 	};
 	
+	const [userr, setUserr] = useState({
+		profilePicture: '',
+		displayName: '',
+	})
+
+	const getUserupdateinfo = async () => {
+		try {axios.get(`https://bdh-server.herokuapp.com/user/get?id=${user._id}`)
+				.then((response) => {
+					console.log(response.data[0])
+					setUserr(response.data[0])
+					})} catch(err) {console.log(err)}
+				}
+
+	useEffect(() => {
+		getUserupdateinfo();
+	}, []);
+			
+
 	if (user){
-		//window.location = '/';
 		return (
 			<div className='log'>
-				<img src={user.profilePicture} class="profilepic"></img> 
-		
+				<img src={userr.profilePicture} class="profilepic"></img> 
 				<div className='LogoutBody'>
 					<div className="Logouttext">
-						{user.displayName} is logged in
+						{userr.displayName} is logged in
 					</div>
 					<div className="LogoutButton">
 						<button onClick = {handleLogout}>logout</button>
