@@ -7,7 +7,8 @@ class App extends Component {
         this.state = {
             email: '',
             displayName: '',
-            password: ''
+            password: '',
+            error: '',
         }
         this.changeUsername = this.changeUsername.bind(this)
         this.changePassword = this.changePassword.bind(this)
@@ -40,14 +41,14 @@ class App extends Component {
             displayName: this.state.displayName,
             password: this.state.password
         }
-
-        axios.post("https://bdh-server.herokuapp.com/user", registered)
-            .then((response) => {
-                console.log(response.data)
-                window.location = '/login';
-            }).catch((res)=>{
-                console.log(res)
-            })
+        axios.post("https://bdh-server.herokuapp.com/user", registered).then((response) => {
+            console.log(response.data)
+            window.location = '/login';
+        }).catch((res)=>{
+            // console.log("res,", res.response.data)
+            this.setState({...this.state, error: res.response.data.password}, console.log(this.state))
+        })
+        
 
         {/*should return person home */}
     }
@@ -66,7 +67,9 @@ class App extends Component {
                             <button className="button">Register</button>
                         </form>
                     </div>
+                    
                 </div>
+                {this.state.error !== '' && <div style={{textAlign:"center"}}>{this.state.error}</div>}
             </div>
             );
     }

@@ -80,7 +80,7 @@ class Home extends React.Component {
     render() {
         return (
             <div className="homeBody">
-                <h1>Home</h1>
+                <h1 style={{textAlign:"center", paddingBottom:"1rem"}}>Bulldog Auction House</h1>
                 <div className = "Tagssearch" style={{textAlign:"center", paddingBottom:"1rem"}}>
                     <form  >
                         <input className="searchbar"
